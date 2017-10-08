@@ -1,2 +1,3 @@
-work/
-localhost/
+/work/
+/lesson/
+/localhost/
