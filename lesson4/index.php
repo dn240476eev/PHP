@@ -234,6 +234,8 @@ function makecoffee($types = array("капуччино"), $coffeeMaker = NULL)
 }
 echo makecoffee();
 echo makecoffee(array("капуччино", "лавацца"), "в чайнике");
+echo "<br>";
+echo "test GIT";
 ?>
 
 </body>
