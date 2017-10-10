@@ -1,4 +1,4 @@
-/work/
-/lesson/
-/localhost/
+work/
+lesson/
+localhost/
 .idea/
