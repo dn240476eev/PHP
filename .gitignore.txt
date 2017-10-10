@@ -1,3 +1,4 @@
 /work/
 /lesson/
 /localhost/
+.idea/
