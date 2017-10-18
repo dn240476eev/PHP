@@ -16,8 +16,7 @@ if (($route)) {
 			// include 'html/product.php';
 			break;
 		default:
-			include "html/$route.php";
-			// include 'html/main.php';
+			 include 'html/main.php';
 			break;
 	}
 }

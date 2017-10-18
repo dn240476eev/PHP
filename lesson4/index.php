@@ -64,18 +64,18 @@ $pages = unserialize($data_pages);
 $products = unserialize($data_products);
 $categories = unserialize($data_categories);
 
-//echo "Массив страниц";
-//echo "<br>";
-//echo "<br>";
-//print_r($pages);
+echo "Массив страниц";
+echo "<br>";
+echo "<br>";
+print_r($pages);
 
-//echo "<br>";
-//echo "<br>";
+echo "<br>";
+echo "<br>";
 
-//echo "Массив товаров";
-//echo "<br>";
-//echo "<br>";
-//print_r($products);
+echo "Массив товаров";
+echo "<br>";
+echo "<br>";
+print_r($products);
 
 //echo "<br>";
 //echo "<br>";
@@ -193,7 +193,7 @@ $categories = GetCategoriesTree($categor_res);
                             </div>
                             <!--Изображение товара-->
                             <div>
-                                <img src="http://dummyimage.com/150x150.png/E2DFDE&text=The+image!" />
+                                <img src="http://dummyimage.com/150x150.png/E2DFDE&text=The+image! 150x150" />
                             </div>
                             <!--Название товара-->
                             <div class="product_name">

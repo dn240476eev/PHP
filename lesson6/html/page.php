@@ -11,9 +11,7 @@ $page = getPage($pages);
 </div> -->
 
 <?php 
-$page = getPage($pages, $_GET['id']);
-
-
+    $page = getPage($pages, $_GET['id']);
 ?>
 
 <h1><?php echo $page->name ?></h1>
