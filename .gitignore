@@ -1,6 +1,7 @@
 work/
 lesson/
 localhost/
+.idea/*
 .idea/
 idea/
 .gitignore
