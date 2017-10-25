@@ -35,8 +35,7 @@
 </div>
 
 <?php
-echo __FILE__;
-echo $_SERVER['PHP_SELF'];
+
   // Мультизагрузка файлов:
 
 function loadFile() {

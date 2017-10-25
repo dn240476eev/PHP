@@ -20,7 +20,7 @@ function makeMenu($pages) {
 		foreach ($pages as $page) {
 			if ($page->visible && $page->menu_id == 1) {
 				if ($page->id == 1) {
-					echo "<a href='/'> $page->name </a>";
+					echo "<a href='/shop/'> $page->name </a>";
 				} else {
 					echo "<a href=?route=page&id=$page->id> $page->name </a>";
 				}
@@ -43,6 +43,7 @@ function getPage($pages, $id) {
 
 //Меню END
 
+
 //Регистрация
 
 function register($email1, $password1) {
@@ -56,40 +57,35 @@ function register($email1, $password1) {
         }
 
         $file = file_get_contents('users.txt');
+        $flag = 0;
 
         if (!empty($file)) {
-            $flag = 0;
             $f = fopen('users.txt', 'r');
 
-            while ($line = fgets($f)) {
-                $tmp[] = $line; // Записали в элемент массива строку из файла
-                $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
-                if (!empty($email1)) {
+            if (!empty($email1)) {
+                while ($line = fgets($f)) {
+                    $tmp[] = $line; // Записали в элемент массива строку из файла
+                    $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
+
                     if ($tmp[0] == $email1) {
                         $flag = 1;
-                    } else {
-                        if (empty($password1)) {
-                            $flag = 2;
-                        }
+                    } elseif ($tmp[0] !== $email1 && !empty($password1)) {
+                        $flag = 2;
                     }
-                } else {
-                    $flag = 2;
                 }
             }
             fclose($f);
+        } elseif (!empty($email1) && !empty($password1)) {
+                $flag = 2;
+        }
 
-            if ($flag == 1) {
-                echo "<p class='not-ok'>Пользователь с таким именем существует. Укажите, пожалуйста, другое имя</p>";
-            } elseif ($flag == 2) {
-                echo "<p class='not-ok'>Заполните, пожалуйста, поля !</p>";
-            } else {
-                file_put_contents('users.txt', "$user1\n", FILE_APPEND);
-                echo "<p class='sok'>Поздравляем ! Регистрация прошла успешно</p>";
-            }
-
-        } else {
+        if ($flag == 1) {
+            echo "<p class='not-ok'>Пользователь с таким именем существует. Укажите, пожалуйста, другое имя</p>";
+        } elseif ($flag == 2) {
             file_put_contents('users.txt', "$user1\n", FILE_APPEND);
-            echo "<p>Поздравляем ! Регистрация прошла успешно</p>";
+            echo "<p class='ok'>Поздравляем ! Регистрация прошла успешно</p>";
+        } else {
+            echo "<p class='not-ok'>Заполните, пожалуйста, поля !</p>";
         }
 
     }
@@ -98,51 +94,9 @@ function register($email1, $password1) {
 
 //Регистрация END
 
-//Регистрация
-
-//function register($email1, $password1) {
-//    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['register']) {
-//        $email1 = $_POST['email'];
-//        $password1 = $_POST['password'];
-//        $user1 = $email1 . "::" . $password1;
-//
-//        if (!file_exists('users.txt')) {
-//            file_put_contents('users.txt', '');
-//        }
-//
-//        $file = file_get_contents('users.txt');
-//
-//        if (!empty($file)) {
-//            $flag = false;
-//            $f = fopen('users.txt', 'r');
-//
-//            while ($line = fgets($f)) {
-//                $tmp[] = $line; // Записали в элемент массива строку из файла
-//                $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
-//                if ($tmp[0] == $email1) {
-//                    $flag = true;
-//                }
-//            }
-//            fclose($f);
-//
-//            if ($flag) {
-//                echo "Пользователь с таким именем существует";
-//            } else {
-//                file_put_contents('users.txt', "$user1\n", FILE_APPEND);
-//            }
-//
-//        } else {
-//            file_put_contents('users.txt', "$user1\n", FILE_APPEND);
-//        }
-//
-//    }
-//
-//}
-
-//Регистрация END
-
 
 //Авторизация
+
 function login($email2, $password2)
 {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['login']) {
@@ -157,25 +111,24 @@ function login($email2, $password2)
                 $flag = 0;
                 $f = fopen('users.txt', 'r');
 
-                while ($line = fgets($f)) {
-                    $tmp[] = $line; // Записали в элемент массива строку из файла
-                    $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
-                    if (!empty($email2) && !empty($password2)) {
+                if (!empty($email2) && !empty($password2)) {
+                    while ($line = fgets($f)) {
+                        $tmp[] = $line; // Записали в элемент массива строку из файла
+                        $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
                         if ($email2 == trim($tmp[0]) && $password2 == trim($tmp[1])) {
                             $flag = 1;
-                        } else {
-                            $flag = 2;
                         }
                     }
-                }
+                } else $flag = 2;
+
                 fclose($f);
 
                 if ($flag == 1) {
                     echo "<p class='ok'>Добро пожаловать, $email2 !</p>";
                 } elseif ($flag == 2) {
-                    echo "<p class='not-ok'>Не верно введен логин или пароль</p>";
-                } else {
                     echo "<p class='not-ok'>Заполните, пожалуйста, поля !</p>";
+                } else {
+                    echo "<p class='not-ok'>Не верно введен логин или пароль</p>";
                 }
 
             } else {
@@ -184,44 +137,6 @@ function login($email2, $password2)
 
         }
 }
-
-//Авторизация END
-
-//Авторизация
-
-//if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['login']) {
-//    $email2 =  $_POST['email'];
-//    $password2 =  $_POST['password'];
-//
-//    if(file_exists('users.txt')) {
-//        $file = file_get_contents('users.txt');
-//    }
-//
-//    if (!empty($file) || file_exists('users.txt')) {
-//        $flag = false;
-//        $f = fopen('users.txt', 'r');
-//
-//        while ($line = fgets($f)) {
-//            $tmp[] = $line; // Записали в элемент массива строку из файла
-//            $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
-////            explode('\n', $tmp[1]);
-//            if ($email2 == trim($tmp[0]) && $password2 == trim($tmp[1])) {
-//                $flag = true;
-//            }
-//        }
-//        fclose($f);
-//
-//        if ($flag) {
-//            echo "Добро пожаловать, $email2 !";
-//        }  else {
-//            echo "Не верно введен логин или пароль";
-//        }
-//
-//    } else {
-//        echo "Пользователя с таким именем не существует";
-//    }
-
-//}
 
 //Авторизация END
 

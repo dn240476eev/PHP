@@ -30,7 +30,7 @@ error_reporting(E_ALL);
     </form>
 
     <?php
-        if (!empty($_POST['name'])) {
+        if (isset($_POST['name'])) {
             Guest($_POST['name']);
         }
     ?>
@@ -40,21 +40,32 @@ error_reporting(E_ALL);
     function Guest($name)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['register']) {
+            $array_ext = array('&', '"', '\'', '<', '>', ' ');
             $name = $_POST['name'];
-            $f = fopen('files/guests.txt', 'a+');
+            $name_control = str_split($name);
+            $flag = 1;
 
             if (!empty($name)) {
-                fwrite($f, $name . '::' . date('d m Y h:i:s A') . '::' . __FILE__ . "\n");
+                foreach ($name_control as $control) {
+                    if (in_array($control, $array_ext)) {
+                        $flag = 0;
+                    }
+                }
+                if ($flag) {
+                    $f = fopen('files/guests.txt', 'a+');
+                    fwrite($f, $name . '::' . date('d m Y h:i:s A') . '::' . __FILE__ . "\n");
+                    //            echo __FILE__;
+                    //            echo $_SERVER['PHP_SELF'];
+                    rewind($f);
+                    echo "<h4>Гостевая книга:</h4>";
+                    while (!feof($f)) {
+                        echo htmlspecialchars(fgets($f)) . "<br/>";
+                    }
+
+                    fclose($f);
+                } else echo 'Вводимые данные не должны содержать символов ' . implode(",", $array_ext) . 'пробелов';
+
             } else echo 'Введите Ваше имя';
-
-            rewind($f);
-
-            echo "<h4>Гостевая книга:</h4>";
-            while (!feof($f)) {
-                echo htmlspecialchars(fgets($f)) . "<br/>";
-            }
-
-            fclose($f);
         }
     }
 

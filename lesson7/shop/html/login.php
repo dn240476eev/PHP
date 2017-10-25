@@ -13,7 +13,7 @@
     </form>
 
     <?php
-    if (isset($_POST['email']) && $_POST['password']) {
+    if (isset($_POST['email']) && isset($_POST['password'])) {
         login($_POST['email'], $_POST['password']);
     }
     ?>
