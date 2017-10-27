@@ -8,37 +8,37 @@ require_once 'data/data_products.php';
 //Меню
 
 function getPages($data_pages) {
-	if(file_exists('data/data_pages.php')) {
-		return unserialize($data_pages);
-	}
+    if(file_exists('data/data_pages.php')) {
+        return unserialize($data_pages);
+    }
 }
 
 $pages = getPages($data_pages);
 
 function makeMenu($pages) {
-	if(is_array($pages)) {
-		foreach ($pages as $page) {
-			if ($page->visible && $page->menu_id == 1) {
-				if ($page->id == 1) {
-					echo "<a href='/shop/'> $page->name </a>";
-				} else {
-					echo "<a href=?route=page&id=$page->id> $page->name </a>";
-				}
-			}
-		}
-	}
+    if(is_array($pages)) {
+        foreach ($pages as $page) {
+            if ($page->visible && $page->menu_id == 1) {
+                if ($page->id == 1) {
+                    echo "<a href='/shop/'> $page->name </a>";
+                } else {
+                    echo "<a href=?route=page&id=$page->id> $page->name </a>";
+                }
+            }
+        }
+    }
 }
 
 function getPage($pages, $id) {
-	if(is_array($pages)) {
-		return $pages[$id];
-	}
+    if(is_array($pages)) {
+        return $pages[$id];
+    }
 }
 
 // function getPage($pages) {
-// 	if(is_array($pages)) {
-// 		return $pages[$_GET['id']];
-// 	}
+//     if(is_array($pages)) {
+//         return $pages[$_GET['id']];
+//     }
 // }
 
 //Меню END
@@ -63,16 +63,19 @@ function register($email1, $password1) {
             $f = fopen('users.txt', 'r');
 
             if (!empty($email1)) {
-                while ($line = fgets($f)) {
-                    $tmp[] = $line; // Записали в элемент массива строку из файла
-                    $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
+                if (filter_var($email1, FILTER_VALIDATE_EMAIL)) {
+//                if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email1)) {
+                    while ($line = fgets($f)) {
+                        $tmp[] = $line; // Записали в элемент массива строку из файла
+                        $tmp = explode('::', $line); // Разбили строку на два элемента массива логин и пароль
 
-                    if ($tmp[0] == $email1) {
-                        $flag = 1;
-                    } elseif ($tmp[0] !== $email1 && !empty($password1)) {
-                        $flag = 2;
+                        if ($tmp[0] == $email1) {
+                            $flag = 1;
+                        } elseif ($tmp[0] !== $email1 && !empty($password1)) {
+                            $flag = 2;
+                        }
                     }
-                }
+                } else $flag = 3;
             }
             fclose($f);
         } elseif (!empty($email1) && !empty($password1)) {
@@ -84,10 +87,11 @@ function register($email1, $password1) {
         } elseif ($flag == 2) {
             file_put_contents('users.txt', "$user1\n", FILE_APPEND);
             echo "<p class='ok'>Поздравляем ! Регистрация прошла успешно</p>";
+        } elseif ($flag == 3) {
+            echo "<p class='not-ok'>Е-mail адрес не существует, введите праильный e-mail</p>";
         } else {
             echo "<p class='not-ok'>Заполните, пожалуйста, поля !</p>";
         }
-
     }
 
 }

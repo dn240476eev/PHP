@@ -40,17 +40,18 @@ error_reporting(E_ALL);
     function Guest($name)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['register']) {
-            $array_ext = array('&', '"', '\'', '<', '>', ' ');
             $name = $_POST['name'];
-            $name_control = str_split($name);
             $flag = 1;
+            $ext = '&, ", \, \', <, >,';
 
             if (!empty($name)) {
-                foreach ($name_control as $control) {
-                    if (in_array($control, $array_ext)) {
-                        $flag = 0;
-                    }
+//                if (strip_tags($name) !== $name || trim($name) !== $name) {
+//                    $flag = 0;
+//                }
+                if (htmlspecialchars($name, ENT_QUOTES) !== $name || trim($name) !== $name) {
+                    $flag = 0;
                 }
+
                 if ($flag) {
                     $f = fopen('files/guests.txt', 'a+');
                     fwrite($f, $name . '::' . date('d m Y h:i:s A') . '::' . __FILE__ . "\n");
@@ -63,8 +64,7 @@ error_reporting(E_ALL);
                     }
 
                     fclose($f);
-                } else echo 'Вводимые данные не должны содержать символов ' . implode(",", $array_ext) . 'пробелов';
-
+                } else echo 'Вводимые данные не должны содержать символов ' . $ext . ' пробелов';
             } else echo 'Введите Ваше имя';
         }
     }
@@ -96,17 +96,6 @@ function file_chois($r, $e, $o) {
     $e = 'even.txt';
     $o = 'odd.txt';
 
-    if (!file_exists("files/$r")) {
-        file_put_contents("files/$r", '');
-    }
-    if (!file_exists("files/$e")) {
-        file_put_contents("files/$e", '');
-    }
-    if (!file_exists("files/$o")) {
-        file_put_contents("files/$o", '');
-    }
-
-//    if (file_exists("files/$r")) {
         $file = fopen("files/$r", 'w+');
         $file_even = fopen("files/$e", 'w+');
         $file_odd = fopen("files/$o", 'w+');
@@ -130,7 +119,6 @@ function file_chois($r, $e, $o) {
 
                 }
             }
-//        }
 
         rewind($file); // сброс файлового указателя на начало файла
         rewind($file_even);
