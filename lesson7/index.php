@@ -54,7 +54,7 @@ error_reporting(E_ALL);
 
                 if ($flag) {
                     $f = fopen('files/guests.txt', 'a+');
-                    fwrite($f, $name . '::' . date('d m Y h:i:s A') . '::' . __FILE__ . "\n");
+                    fwrite($f, $name . '::' . date('d m Y H:i:s') . '::' . __FILE__ . "\n");
                     //            echo __FILE__;
                     //            echo $_SERVER['PHP_SELF'];
                     rewind($f);
