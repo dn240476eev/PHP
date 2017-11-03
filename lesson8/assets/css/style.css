@@ -1,0 +1,609 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #ffffff;
+    max-width: 1920px;
+    min-width: 320px;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+a, a:hover, a:focus,
+button, button:hover,
+li:hover, ul, li,
+input:hover,
+.wrap_product:hover {
+    text-decoration: none;
+    transition: 0.3s all linear;
+    -webkit-transition: 0.25s all linear;
+    -moz-transition: 0.25s all linear;
+    -o-transition: 0.25s all linear;
+    -ms-transition: 0.25s all linear;
+}
+
+.wrap_body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.clear {
+    clear: both;
+}
+
+.all {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+img {
+    width: 100%;
+}
+
+button {
+    cursor:pointer;
+}
+
+.button {
+    background: #0B8A0B;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #0EAF0E;
+    -ms-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
+.color-blue {
+    background: #1897D0;
+}
+
+.color-blue:hover {
+    background: #29AEE7;
+
+}
+
+/*Регистрация / авторизация*/
+
+.regisr {
+    text-align: right;
+    background-color: #F5F5F5;
+}
+
+.regisr p {
+    display: inline-block;
+    font-size: 0.7em;
+    margin: 0;
+}
+
+.regisr p a {
+    padding: 5px 7px;
+    text-transform: none;
+    color: #4FC0F0;
+    font-weight: bold;
+}
+
+.regisr_form,
+.login_form {
+    text-align: left;
+    margin: 0 65px;
+    padding: 35px 75px;
+    border: 1px solid #E2DFDE;
+    background: transparent;
+    -webkit-box-shadow: 0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    -moz-box-shadow:    0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    box-shadow:         0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+}
+
+.regisr_form  h2,
+.login_form h2 {
+    margin: 0 0 10px;
+}
+
+.regisr_form h3,
+.login_form h3 {
+    display: inline-block;
+}
+
+.regisr_form h3:nth-of-type(1),
+.login_form h3:nth-of-type(1) {
+    margin-right: 22px;
+}
+
+.regisr_form h3:nth-of-type(2),
+.login_form h3:nth-of-type(2){
+    margin-right: 10px;
+}
+
+.regisr_form input,
+.login_form input  {
+    height: 35px;
+    min-width: 250px;
+    border-radius: 3px;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+.regisr_form input[type="submit"],
+.login_form input[type="submit"] {
+    margin-top: 1em;
+    font-weight: bolder;
+    font-size: 1.05em;
+    height: 45px;
+    min-width: 200px !important;
+}
+
+/*.regisr_form p,*/
+/*.login_form p {*/
+    /*font-size: 1.3em;*/
+    /*letter-spacing: 1px;*/
+/*}*/
+
+.ok {
+    color: #0EAF0E;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.not-ok {
+    color: red;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+    /*////////Регистрация / авторизация*/
+
+
+/*Меню*/
+
+.menu,
+footer {
+    max-width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    min-height: 60px;
+    border: 1px solid #E2DFDE;
+    background: transparent;
+    -webkit-box-shadow: 0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    -moz-box-shadow:    0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    box-shadow:         0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+}
+
+nav a,
+footer a {
+    font-size: 1.25em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    color: #0000A0;
+    display: inline-block;
+}
+
+nav a:hover, nav a:focus,
+footer a:hover, footer a:focus {
+    background: #F0FAFF;
+    -ms-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
+}
+
+.cart {
+    float: right;
+    position: relative;
+}
+
+.cart a {
+    padding: 0;
+    width: 90px;
+}
+
+.cart span {
+    font-size: 0.8em;
+    /*padding-left: 0;*/
+    color: #0095D5;
+    /*margin: 18px 5px;*/
+    text-transform: none;
+    position: absolute;
+    top: 18px;
+    left: 50px;
+}
+
+.menu img {
+    width: 55px;
+    height: auto;
+}
+
+/*Категории - список меню при нажатии на кнопку*/
+
+.categories {
+    width: 30%;
+    float: left;
+}
+
+.categories h3 {
+    font-size: 1.5em;
+    margin: 0;
+    padding: 5px;
+    background: #C9E7FC;
+    width: 90%;
+    min-width: 200px;
+}
+
+.category {
+    margin-top: -16px;
+}
+
+.category > ul {
+    width: 91%;
+    padding-left: 5px;
+    margin-left: -5px;
+}
+
+.category li {
+    text-decoration: none;
+    text-transform: uppercase;
+    list-style-type: none;
+    /*border: 1px solid #E2DFDE;*/
+    position: relative;
+    background: #fff;
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+.category li a {
+    display: inline-block;
+    color: #000;
+    white-space: nowrap; /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
+}
+
+.category li:hover > a { /* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
+    font-size: 1.05em;
+}
+
+.category > ul ul{
+    position: absolute;
+    z-index: 999;
+    left: -9999px; /* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
+    opacity: 0; /* Устанавливаем начальное состояние прозрачности */
+    -webkit-transition: 0.55s linear opacity; /* В Webkit выпадающие пункты будут проявляться */
+}
+
+.category li a, .category li span {
+    display: inline-block;
+    margin-right: -100%;
+    vertical-align: bottom;
+    width: 100%;
+}
+
+.category li span {
+    color: transparent;
+    text-align: right;
+    height: inherit;
+}
+
+.label {
+     display: block;
+     position: relative;
+     cursor: pointer;
+    padding: 7px;
+}
+
+.category label:hover { /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+    background:rgba(213,241,255,0.75); /* Будет полупрозрачным */
+    border: 1px solid #fff;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.category > ul input[type=checkbox]:checked ~ label:nth-of-type(n) ~ ul {
+    position: relative;
+    left: 0; /* Приносим его обратно на экран, когда нужно */
+    top: 0;
+    width: 100%;
+    opacity: 1; /* Делаем непрозрачным */
+}
+
+/*рисуем треугольник рядом с пунктами содержащими подпункты*/
+
+.category span:before {
+    content: "";
+    border-width: .5em;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+    position: absolute;
+    top: .7em;
+    right: 0.25em;
+}
+
+.category input[type=checkbox]:checked + label > span:before{
+    transform: rotate(90deg);
+    color: #0B8A0B;
+}
+
+
+/*///Категории*/
+
+    /*Контент*/
+
+.content {
+    width: 70%;
+    float: left;
+    padding-top: 1px;
+    position: relative;
+}
+
+/*//Контент*/
+
+
+/*Продукция*/
+
+.products {
+    padding: 37px 0;
+}
+
+.products_ul {
+    width: 100%;
+    margin: 0 auto;
+    padding: 4px;
+}
+
+.product {
+    display: inline;
+    width: 33%;
+    min-height: 400px;
+    float: left;
+    padding: 1% 1.5%;
+    text-align: center;
+}
+
+.wrap_product {
+    border: 1px solid #EBEAE9;
+    padding: 7%;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+}
+
+.wrap_product > a {
+    display: block;
+    color: blue;
+}
+
+.wrap_product:hover {
+    -ms-transform:scale(1.01);
+    -webkit-transform:scale(1.01);
+    transform:scale(1.01);
+    -webkit-box-shadow: 0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+}
+
+.product_data {
+    position: absolute;
+    right: 12%;
+    top: 3%;
+}
+
+.product_name {
+    margin: 7px 0;
+    min-height: 72px;
+}
+
+.wrap_product > a:visited {
+    color: darkblue;
+}
+
+.product_name h3 {
+    display: inline;
+    font-size: 1.1em;
+    font-weight: normal;
+    line-height: 0.5;
+    margin: 0;
+}
+
+.price p, option {
+    margin: 0 0 5px 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+.stock p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*///Продукция*/
+
+/*Страница товара*/
+
+.product-page {
+    padding: 37px 0;
+}
+
+.product-page h1 {
+    font-size: 1.75em;
+    margin: 0 0 10px;
+}
+
+.img-prod-page {
+    float: left;
+    width: 50%;
+    padding-right: 3%;
+}
+
+.info-product-page form h3 {
+    margin-bottom: 5px;
+}
+
+.info-product-page {
+    float: left;
+    width: 50%;
+    padding: 0 3% 3%;
+    border: 1px solid #EBEAE9;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+}
+
+.sku-product_page {
+    float: right;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #EBEAE9;
+    margin: 3% 0;
+}
+
+.price-product_page {
+    float: left;
+    width: 60%;
+}
+
+.zakaz-product_page {
+    float: left;
+    width: 40%;
+}
+
+.price-product_page p,
+.price-product_page option {
+    color: #FF6A00;
+    font-weight: bold;
+    margin: 0;
+}
+
+.price-product_page p {
+    font-size: 1.5em;
+}
+
+.price-product_page option {
+    font-size: 1.1em;
+}
+
+.zakaz-product_page input {
+    margin-top: 5px;
+}
+
+input[name="favor"] {
+    border: none;
+    background: transparent;
+    text-align: right;
+    text-decoration: underline;
+    color: blue;
+    margin-top: 27px;
+    display: block;
+    float: right;
+    cursor: pointer;
+}
+
+/*///Страница товара*/
+
+/*Список желаний - избранное*/
+
+.favor {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.favor a {
+    text-decoration: underline;
+}
+
+/*///Список желаний - избранное*/
+
+
+/*Страница Корзины*/
+
+.cart-page {
+    padding: 20px 0;
+}
+
+.cart-page h1 {
+    font-size: 1.75em;
+    margin: 0 0 10px;
+}
+
+.cart-page table {
+    text-align: center;
+    max-width: 99%;
+}
+
+.cart-page th:first-of-type {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.cart-page table tr td:nth-of-type(2) {
+    text-align: left;
+}
+
+.cart-page a {
+    text-decoration: underline;
+}
+
+.cart-page input {
+    text-align: center;
+}
+
+.koord-button  {
+    text-align: right;
+    margin-top: 20px;
+}
+
+/*///Страница Корзины*/
+
+
+/*Последняя посещенная страница*/
+
+.last_page p, .last_page a {
+    text-align: right;
+    text-transform: none;
+    margin: 0;
+}
+
+.last_page p {
+    margin: -10px 0;
+}
+
+.last_page a:hover, .last_page a:focus {
+    background-color: inherit;
+}
+
+/*////Последняя посещенная страница*/
