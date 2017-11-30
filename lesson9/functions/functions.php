@@ -426,6 +426,7 @@ function getCard($products) {
 
 function buy($products) {
     $cart_item = $_POST['cart_item'];
+
     $flag = 0;
     $order = rand(1,9999);
     $date = date('d-m-Y');

@@ -15,16 +15,16 @@
         <input type="text" name="id" value="<?= (isset($post_array) ? $post_array[0] : '') ?>" title="не менее 4-х латинских букв и цифры" placeholder="не менее 4-х латинских букв и цифры">
         <br>
         <h3>Введите Ваше имя *:</h3>
-        <input type="text" name="name" value="<?= (isset($post_array) ? $post_array[0] : '') ?>" title="только кирилические буквы, символ дефиз, без цифр" placeholder="только кирилические буквы, символ дефиз, без цифр">
+        <input type="text" name="name" value="<?= (isset($post_array) ? $post_array[1] : '') ?>" title="только кирилические буквы, символ дефиз, без цифр" placeholder="только кирилические буквы, символ дефиз, без цифр">
         <br>
         <h3>Введите Ваш e-mail *:</h3>
-        <input type="text" name="email" value="<?= (isset($post_array) ? $post_array[0] : '') ?>" title="только латинские буквы, знаки .-" placeholder="только латинские буквы, знаки .-">
+        <input type="text" name="email" value="<?= (isset($post_array) ? $post_array[2] : '') ?>" title="только латинские буквы, знаки .-" placeholder="только латинские буквы, знаки .-">
         <br>
         <h3>Введите пароль *:</h3>
-        <input type="password" name="password" value="<?= (isset($post_array) ? $post_array[0] : '') ?>" title="не менее 4-х символов из латинских букв, цифр, знаков /-*?" placeholder="не менее 4-х символов из латинских букв, цифр, знаков /-*?">
+        <input type="password" name="password" value="<?= (isset($post_array) ? $post_array[3] : '') ?>" title="не менее 4-х символов из латинских букв, цифр, знаков /-*?" placeholder="не менее 4-х символов из латинских букв, цифр, знаков /-*?">
         <br>
         <h3>Введите подтверждение пароля *:</h3>
-        <input type="password" name="password1" value="<?= (isset($post_array) ? $post_array[0] : '') ?>" title="пароль должен совпадать" placeholder="повтор пароля">
+        <input type="password" name="password1" value="<?= (isset($post_array) ? $post_array[4] : '') ?>" title="пароль должен совпадать" placeholder="повтор пароля">
         <br>
         <div class="clear"></div>
         <div class="center">
