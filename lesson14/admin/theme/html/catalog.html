@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<div class="row">
+    <a href="/admin/product/">Добавить товар</a>
+
+
+    <div class="col-lg-12">
+        {% for product in products %}
+            <div class="col-lg-1">{{ product.id }}</div>
+            <div class="col-lg-4">{{ product.name }}</div>
+            <div class="col-lg-7">{{ product.description }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
