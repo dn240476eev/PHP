@@ -15,6 +15,7 @@ class Product extends Core
 
         $categories = new Categories(); // подключаем модель Товары
         $categories_catalog = $categories->getCategories();
+        $categories_catalog_tree = $categories->GetCategoriesTree();
 
         $uri = parse_url($_SERVER['REQUEST_URI']);
         $parts = explode('/', $uri['path']);
@@ -23,7 +24,8 @@ class Product extends Core
         }
         $array_vars = array(
             'pages' => $all_pages,
-            'categories' => $categories_catalog,
+            'categories_catalog' => $categories_catalog,
+            'categories' => $categories_catalog_tree,
             'product' => $product,
         );
 

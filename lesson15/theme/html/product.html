@@ -23,56 +23,88 @@
 <div class="container-fluid wrap_body">
     <div class="row">
         <div class="col-sm-4 col-md-3">
-            <h2>Категории</h2>
+            <div class="categories">
+                <h2>Категории</h2>
+                <div class="category">
+                    {% macro menu_categories(categories) %}
+                    {% import _self as macros %}
+                    {% for category in categories %}
+                    {% if category.visible %}
+                    <li>
+                        <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
+                        <!--<label for="{{ category.id }}" class="label">-->
+                        <a href="category?url={{ category.url }}">{{ category.name }}</a>
+                        {% if category.visible %}
+                        {% if category.subcategories %}
+                        <!--<span>></span>-->
+                        <!--</label>-->
+                        <ul>
+                            {{ macros.menu_categories(category.subcategories) }}
+                        </ul>
+
+                        {% endif %}
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endmacro %}
+
+                    {% import _self as macros %}
+
+                    <ul class="main-menu">
+                        {{ macros.menu_categories(categories) }}
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col-sm-8 col-md-9">
             <div class="product-page">
                 <h1>{{ category.name }}</h1>
-                <!--&lt;!&ndash;Изображение товара&ndash;&gt;-->
-                <!--<div class="img-prod-page">-->
-                    <!--{% if product.file_name is empty %}-->
-                        <!--<p>Картинки нет</p>-->
-                    <!--{% else %}-->
-                        <!--<img src='/uploads/{{ product.file_name }}' alt='' />-->
-                    <!--{% endif %}-->
-                <!--</div>-->
-                <!--<div class="info-product-page">-->
-                    <!--&lt;!&ndash;&lt;!&ndash;Артикул товара&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div class="sku-product_page">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<p>Артикул: <span><?php echo $product->variant->sku ?></span></p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--&lt;!&ndash;Наличие на складе товара&ndash;&gt;-->
-                    <!--<div class="stock-product_page">-->
-                        <!--{% if product.amount is empty %}-->
-                            <!--<p>Нет на складе</p>-->
-                        <!--{% else %}-->
-                            <!--<p>Есть на складе</p>-->
-                        <!--{% endif %}-->
+                <!--Изображение товара-->
+                <div class="img-prod-page">
+                    {% if product.file_name is empty %}
+                        <p>Картинки нет</p>
+                    {% else %}
+                        <img src='/uploads/{{ product.file_name }}' alt='' />
+                    {% endif %}
+                </div>
+                <div class="info-product-page">
+                    <!--&lt;!&ndash;Артикул товара&ndash;&gt;-->
+                    <!--<div class="sku-product_page">-->
+                        <!--<p>Артикул: <span><?php echo $product->variant->sku ?></span></p>-->
                     <!--</div>-->
+                    <!--Наличие на складе товара-->
+                    <div class="stock-product_page">
+                        {% if product.amount is empty %}
+                            <p>Нет на складе</p>
+                        {% else %}
+                            <p>Есть на складе</p>
+                        {% endif %}
+                    </div>
 
-                    <!--<form method="post">-->
-                        <!--&lt;!&ndash;Цена товара&ndash;&gt;-->
-                        <!--<div class="price-product_page">-->
-                            <!--<h3>Цена:</h3>-->
-                            <!--<p>{{ product.price }} грн</p>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash;Заказ товара&ndash;&gt;-->
-                        <!--<div class="zakaz-product_page">-->
-                            <!--<h3>Количество:</h3>-->
-                            <!--<input type="hidden" name="id" value="{{ product.amount }}">-->
-                            <!--<input type="number" name="amount" value="1" min="1" max="50">-->
-                        <!--</div>-->
-                        <!--<div class="clear"></div>-->
-                        <!--<div class="line"></div>-->
-                        <!--<button class="button" type="submit" name="cart" value="1">В корзину</button>-->
-                        <!--<input type="submit" name="favor" value="Добавить в избранное">-->
-                    <!--</form>-->
-                <!--</div>-->
-                <!--<div class="clear"></div>-->
-                <!--<div class="description-prod-page">-->
-                    <!--<h3>Описание:</h3>-->
-                    <!--<p>{{ product.description }}</p>-->
-                <!--</div>-->
+                    <form method="post">
+                        <!--Цена товара-->
+                        <div class="price-product_page">
+                            <h3>Цена:</h3>
+                            <p>{{ product.price }} грн</p>
+                        </div>
+                        <!--Заказ товара-->
+                        <div class="zakaz-product_page">
+                            <h3>Количество:</h3>
+                            <input type="hidden" name="id" value="{{ product.amount }}">
+                            <input type="number" name="amount" value="1" min="1" max="50">
+                        </div>
+                        <div class="clear"></div>
+                        <div class="line"></div>
+                        <button class="button" type="submit" name="cart" value="1">В корзину</button>
+                        <input type="submit" name="favor" value="Добавить в избранное">
+                    </form>
+                </div>
+                <div class="clear"></div>
+                <div class="description-prod-page">
+                    <h3>Описание:</h3>
+                    <p>{{ product.description }}</p>
+                </div>
         </div>
     </div>
 </div>
