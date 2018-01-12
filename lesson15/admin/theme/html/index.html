@@ -1,0 +1,104 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <link href="/admin/theme/assets/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/admin/theme/assets/css/flat-ui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/admin/theme/assets/css/style.css">
+        <link rel="shortcut icon" href="../assets/img/favicon.ico">
+    </head>
+    <body class="page-home layout-default">
+    <header class="header-navbar clearfix">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="collapse navbar-collapse navbar-main-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class=" ">
+                            <a href="/admin" class="">
+                                Главная
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="/admin/categories/" class="">
+                                Категории
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="/admin/products/" class="">
+                                Каталог
+                            </a>
+                        </li>
+                        <!--new-->
+                        <li class=" ">
+                            <a href="/admin/pages" class="">
+                                Страницы
+                            </a>
+                        </li>
+                        <!--<li class="dropdown">-->
+                            <!--<a href="#" data-toggle="dropdown" class="dropdown-toggle">-->
+                                <!--Pages-->
+                                <!--<span class="caret"></span>-->
+                            <!--</a>-->
+                            <!--<span class="dropdown-arrow"></span>-->
+                            <!--<ul class="dropdown-menu">-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/about" class="">-->
+                                        <!--About Us-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/contact" class="">-->
+                                        <!--Contact Us-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/pricing-table" class="">-->
+                                        <!--Pricing Table-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/services" class="">-->
+                                        <!--Services-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/signin" class="">-->
+                                        <!--Sign In-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/register" class="">-->
+                                        <!--Register-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/error" class="">-->
+                                        <!--Error Page-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class=" ">-->
+                                    <!--<a href="http://october/404" class="">-->
+                                        <!--404 Page-->
+                                    <!--</a>-->
+                                <!--</li>-->
+
+                            <!--</ul>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="layout-content">
+        <section class="home-title">
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
+    </div>
+    </body>
+    <script src="/admin/theme/assets/js/vendor/jquery.min.js"></script>
+    <script src="/admin/theme/assets/js/flat-ui.min.js"></script>
+</html>

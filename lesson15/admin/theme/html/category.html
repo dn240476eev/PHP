@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ category.name }} </h1> <!--назв товара-->
+<div class="col-lg-12">
+    <!--все нах только в форме-->
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ category.id }}">  <!--скрытое поле для контроля есть ли в базе данных такой id-->
+        <div class="form-group">
+            <label>Название</label>
+            <input class="form-control" type="text" name="name" value="{{ category.name }}">
+        </div>
+        <div class="form-group">
+            <label>Видимость</label>
+            {% if category.visible == 1 %}
+            <input class="form-control" type="checkbox" name="visible" value="1" checked>
+            {% else %}
+            <input class="form-control" type="checkbox" name="visible" value="1">
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label>Картинка</label>
+            <input class="form-control" type="file" name="files" value="">
+        </div>
+        <div class="form-group">
+            <label>Вышестящая категория</label>
+            <select name="parent_id" >
+                {% if category.parent_id == 0 %}
+                    <option value="0">Нет вышестоящей категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% else %}
+                    {% set cp = category.parent_id %}
+                    {% for category in categories %}
+                        {% if cp == category.id %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    <option value="0">Нет вышестоящей категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Описание</label>
+            <textarea class="form-control" name="description">{{ category.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input class="form-control" type="text" name="url" value="{{ category.url }}">
+        </div>
+
+        <input type="submit" name="save" value="Сохранить">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "index.html" %}
+
+{% block content %}
+<head>
+    <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+<nav>
+    <div class="menu">
+        <div class="wrap_body">
+            <a href="/">Главная</a>
+            {% for page in pages %}
+                {% if page.visible == 1 %}
+                    <a href="page?url={{ page.url }}">{{ page.name }}</a>
+                    <!--<a href="page?id={{ page.id }}">{{ page.name }}</a>-->
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+
+{% block sidebar %}
+{% set i = 0 %}
+<div class="container-fluid wrap_body">
+    <div class="row">
+        <div class="col-sm-4 col-md-3">
+            <div class="categories">
+                <h2>Категории</h2>
+                <div class="category">
+                    {% macro menu_categories(categories) %}
+                    {% import _self as macros %}
+                    {% for category in categories %}
+                    {% if category.visible %}
+                    <li>
+                        <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
+                        <!--<label for="{{ category.id }}" class="label">-->
+                            <a href="category?url={{ category.url }}">{{ category.name }}</a>
+                    {% if category.visible %}
+                    {% if category.subcategories %}
+                    <!--<span>></span>-->
+                        <!--</label>-->
+                        <ul>
+                            {{ macros.menu_categories(category.subcategories) }}
+                        </ul>
+
+                        {% endif %}
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endmacro %}
+
+                    {% import _self as macros %}
+
+                    <ul class="main-menu">
+                        {{ macros.menu_categories(categories) }}
+                    </ul>
+             </div>
+
+                <!--<ul>-->
+                    <!--{% for category in categories %}-->
+                        <!--{% if category.visible %}-->
+                            <!--<li>-->
+                                <!--<input type="checkbox" name="but" id="category.id">-->
+                                <!--<label for="category.id" class="label">-->
+                                    <!--<a href='#'>{{ category.name }}</a>-->
+                                    <!--{% if category.subcategories|length > 0 %}-->
+                                    <!--<span>></span>-->
+                                <!--</label>-->
+                                    <!--<ul>-->
+                                        <!--{% for category in category.subcategories %}-->
+                                        <!--{% if category.visible %}-->
+                                        <!--<li>-->
+                                            <!--<a href="{{ category.id }}">{{ category.name }}</a>-->
+                                        <!--</li>-->
+                                        <!--{% endif %}-->
+                                        <!--{% endfor %}-->
+                                    <!--</ul>-->
+                                    <!--{% endif %}-->
+                                <!--</label>-->
+                            <!--</li>-->
+                        <!--{% endif %}-->
+                    <!--{% endfor %}-->
+                <!--</ul>-->
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-9">
+            <section class="products">
+                <div class="row">
+                    {% for product in products %}
+                        {% if product.visible == 1 and product.hit == 1 and product.amount > 0 and i < 6 %}
+                            <div class="col-sm-6 col-md-4">
+                                <div class="product">
+                                    <div class="wrap_product">
+                                        <a href="product?url={{ product.url }}">
+                                            <!--Дата товара-->
+                                            <div class="product_data">
+                                                <p>{{ product.created_at }}</p>
+                                            </div>
+                                            <div class="hit">
+                                                <img src='/uploads/hit.png' alt='hit' />
+                                            </div>
+                                            <!--Изображение товара-->
+                                            <div class="img-prod">
+                                                {% if product.file_name is empty %}
+                                                    <p>Картинки нет</p>
+                                                {% else %}
+                                                    <img src='/uploads/{{ product.file_name }}' alt='' width='90' />
+                                                {% endif %}
+                                            </div>
+                                            <!--Название товара-->
+                                            <div class="product_name">
+                                                <h3>{{ product.name }}</h3>
+                                            </div>
+                                            <!--Цена товара-->
+                                            <div class="price">
+                                                <p>{{ product.price }} грн</p>
+                                            </div>
+                                            <!--Количество товара-->
+                                            <div class="stock">
+                                                <p>На складе: {{ product.amount }} шт</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% set i = i + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!--<ul>-->
+    <!--foreach ($categories as $category) {-->
+    <!--if($category->visible) { //важная проверка, которая позволит выводит только включенные категории на сайте-->
+    <!--echo "<li><input type=\"checkbox\" name=\"but\" id=\"$category->id\">-->
+        <!--<label for=\"$category->id\" class=\"label\"><a href='#'>$category->name</a>";-->
+            <!--if(!empty($category->subcategories)) {-->
+            <!--// проверяем есть ли подкатегории и вызываем заново функцию для вывода-->
+            <!--echo "<span>></span></label>";-->
+        <!--makeCategories($category->subcategories); // передаем в функцию уже массив обьектов покатегорий-->
+        <!--}-->
+        <!--echo "</li>";-->
+    <!--}-->
+    <!--}-->
+<!--</ul>-->
+
+{% endblock %}

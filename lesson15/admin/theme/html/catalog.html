@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-12 head-tabl">
+            <div class="col-lg-1">Id</div>
+            <div class="col-lg-2">Наименование</div>
+            <div class="col-lg-1">Цена</div>
+            <div class="col-lg-1">Кол-во</div>
+            <div class="col-lg-1">Види-мость</div>
+            <div class="col-lg-1">Хит продаж</div>
+            <div class="col-lg-1">Фото</div>
+            <div class="col-lg-1">Вышестоящая категория</div>
+            <div class="col-lg-2">Описание</div>
+            <div class="col-lg-1">Ссылка</div>
+        </div>
+        {% for product in products %}
+        <div class="col-lg-12 border-bott">
+            <div class="col-lg-1 center">{{ product.id }}</div>
+            <div class="col-lg-2">
+                <a href="/admin/product?id={{ product.id }}">{{ product.name }}</a>
+            </div>
+            <div class="col-lg-1 center">
+                <a href="/admin/product?id={{ product.id }}">{{ product.price }}</a>
+            </div>
+            <div class="col-lg-1 center">
+                <a href="/admin/product?id={{ product.id }}">{{ product.amount }}</a>
+            </div>
+            <div class="col-lg-1 center border-l-r">
+                {% if product.visible == 1 %}
+                <input class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-lg-1 center">
+                {% if product.hit == 1 %}
+                <input class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-lg-1">
+                {% if product.file_name is empty %}
+                    <p>Картинки нет</p>
+                {% else %}
+                    <a href="/admin/product?id={{ product.id }}"><img src='/uploads/{{ product.file_name }}' alt='' width='90' /></a>
+                {% endif %}
+            </div>
+            <div class="col-lg-1">
+                {% for category in categories %}
+                    {% if category.id == product.category_id %}
+                        <a href="/admin/product?id={{ product.id }}">{{ category.name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-2">
+                <a href="/admin/product?id={{ product.id }}">{{ product.description }}</a>
+            </div>
+            <div class="col-lg-1">
+                <a href="/admin/product?id={{ product.id }}">{{ product.url }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-lg-2 col-lg-offset-9 border center">
+        <a href="/admin/product">Добавить товар</a>
+    </div>
+{% endblock %}

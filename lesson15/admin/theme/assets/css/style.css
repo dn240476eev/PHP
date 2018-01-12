@@ -1,0 +1,61 @@
+html, body {
+    /*overflow-x: hidden;*/
+}
+
+html,body {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    outline: 0 none;
+    vertical-align: baseline;
+    /*margin: 0;*/
+    /*padding: 0;*/
+}
+
+body {
+    max-width: 100%;
+    min-width: 350px;
+    min-height: 100%;
+    font-family: 'Fira Sans', sans-serif;
+    /*font-family: 'Arimo', sans-serif;*/
+    font-size: 16px;
+    line-height: 1 !important;
+    color: #353535;
+}
+
+div {
+    padding: 15px;
+}
+
+div, a, p {
+    font-size: 16px;
+}
+
+.head-tabl {
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #353535;
+    border-top: 1px solid #353535;
+}
+
+.border {
+    border: 2px solid #353535;
+}
+
+.border-bott {
+    border-bottom: 1px solid #353535;
+}
+
+.center {
+    text-align: center;
+}
+
+.navbar-collapse {
+    padding: 0;
+}
+
+input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer;
+    padding: 15px 20px !important;
+}

@@ -202,6 +202,8 @@ function GetCategoriesTree($categories,$parent_id=0) {
             }
         }
     }
+//    print_r($results);
+
     return $results;
 }
 

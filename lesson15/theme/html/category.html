@@ -1,0 +1,116 @@
+{% extends "index.html" %}
+
+{% block content %}
+<head>
+    <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+    <nav>
+        <div class="menu">
+            <div class="wrap_body">
+            <a href="/">Главная</a>
+                {% for page in pages %}
+                    {% if page.visible == 1 %}
+                        <a href="page?url={{ page.url }}">{{ page.name }}</a>
+                        <!--<a href="page?id={{ page.id }}">{{ page.name }}</a>-->
+                    {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block sidebar %}
+{% set i = 0 %}
+<div class="container-fluid wrap_body">
+    <div class="row">
+        <div class="col-sm-4 col-md-3">
+            <div class="categories">
+                <h2>Категории</h2>
+                <div class="category">
+                    {% macro menu_categories(categories) %}
+                    {% import _self as macros %}
+                    {% for category in categories %}
+                    {% if category.visible %}
+                    <li>
+                        <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
+                        <!--<label for="{{ category.id }}" class="label">-->
+                        <a href="category?url={{ category.url }}">{{ category.name }}</a>
+                        {% if category.visible %}
+                        {% if category.subcategories %}
+                        <!--<span>></span>-->
+                        <!--</label>-->
+                        <ul>
+                            {{ macros.menu_categories(category.subcategories) }}
+                        </ul>
+
+                        {% endif %}
+                        {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endmacro %}
+
+                    {% import _self as macros %}
+
+                    <ul class="main-menu">
+                        {{ macros.menu_categories(categories) }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-9">
+            <section class="products">
+                <div class="row">
+                    {% set flag = 0 %}
+                    {% for product in products %}
+                    {% if category.id == product.category_id %}
+
+                        {% if product.visible == 1 %}
+                           {% set flag = 1 %}
+                            <div class="col-sm-6 col-md-4">
+                                <div class="product">
+                                    <div class="wrap_product">
+                                        <a href="product?url={{ product.url }}">
+                                            <!--Дата товара-->
+                                            <div class="product_data">
+                                                <p>{{ product.created_at }}</p>
+                                            </div>
+                                            <!--Изображение товара-->
+                                            <div class="img-prod">
+                                                {% if product.file_name is empty %}
+                                                    <p>Картинки нет</p>
+                                                {% else %}
+                                                    <img src='/uploads/{{ product.file_name }}' alt='' width='90' />
+                                                {% endif %}
+                                            </div>
+                                            <!--Название товара-->
+                                            <div class="product_name">
+                                                <h3>{{ product.name }}</h3>
+                                            </div>
+                                            <!--Цена товара-->
+                                            <div class="price">
+                                                <p>{{ product.price }} грн</p>
+                                            </div>
+                                            <!--Количество товара-->
+                                            <div class="stock">
+                                                <p>На складе: {{ product.amount }} шт</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% if flag == 0 %}
+                        <p>Нет товаров данной категории</p>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

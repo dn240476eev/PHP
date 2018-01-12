@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-12 head-tabl">
+            <div class="col-lg-1">Id</div>
+            <div class="col-lg-2">Наименование</div>
+            <div class="col-lg-1">Види-мость</div>
+            <div class="col-lg-1">Фото</div>
+            <div class="col-lg-2">Вышестоящая категория</div>
+            <div class="col-lg-3">Описание</div>
+            <div class="col-lg-2">Ссылка</div>
+        </div>
+        {% for category in categories %}
+        <div class="col-lg-12 border-bott">
+            <div class="col-lg-1 center">{{ category.id }}</div>
+            <div class="col-lg-2">
+                <a href="/admin/category?id={{ category.id }}">{{ category.name }}</a>
+            </div>
+            <div class="col-lg-1 center border-l-r">
+                {% if category.visible == 1 %}
+                <input class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-lg-1">
+                {% if category.image is empty %}
+                <p>Картинки нет</p>
+                {% else %}
+                <a href="/admin/category?id={{ category.id }}"><img src='/uploads/{{ category.image }}' alt='' width='90' /></a>
+                {% endif %}
+            </div>
+            <div class="col-lg-2">
+                {% set cp = category.parent_id %}
+                {% set c = category.id %}
+                {% for category in categories %}
+                    {% if category.id == cp %}
+                       <a href="/admin/category?id={{ c }}">{{ category.name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-3">
+                <a href="/admin/category?id={{ category.id }}">{{ category.description }}</a>
+            </div>
+            <div class="col-lg-2">
+                <a href="/admin/category?id={{ category.id }}">{{ category.url }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-lg-2 col-lg-offset-9 border center">
+        <a href="/admin/category">Добавить категорию</a>
+    </div>
+    {% endblock %}

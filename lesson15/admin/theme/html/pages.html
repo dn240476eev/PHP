@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-12 head-tabl">
+            <div class="col-lg-1">Id</div>
+            <div class="col-lg-2">Наименование</div>
+            <div class="col-lg-1">Порядок вывода</div>
+            <div class="col-lg-1">Види-мость</div>
+            <div class="col-lg-6">Описание</div>
+            <div class="col-lg-1">Ссылка</div>
+        </div>
+        {% for page in pages %}
+        <div class="col-lg-12 border-bott">
+            <div class="col-lg-1 center">{{ page.id }}</div>
+            <div class="col-lg-2">
+                <a href="/admin/page?id={{ page.id }}">{{ page.name }}</a>
+            </div>
+            <div class="col-lg-1">
+                <a href="/admin/page?id={{ page.id }}">{{ page.sort }}</a>
+            </div>
+            <div class="col-lg-1 center border-l-r">
+                {% if page.visible == 1 %}
+                <input class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <a href="/admin/page?id={{ page.id }}">{{ page.description }}</a>
+            </div>
+            <div class="col-lg-1">
+                <a href="/admin/page?id={{ page.id }}">{{ page.url }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-lg-2 col-lg-offset-9 border center">
+        <a href="/admin/page">Добавить страницу</a>
+    </div>
+
+</div>
+{% endblock %}
