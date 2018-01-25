@@ -1,15 +1,26 @@
 <!DOCTYPE>
 <html>
     <head>
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-        <link href="/admin/theme/assets/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/theme/assets/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!--<link href="/admin/theme/assets/css/flat-ui.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="/theme/assets/css/style.css">
         <link rel="shortcut icon" href="../assets/img/favicon.ico">
     </head>
     <body>
-
+    <nav>
+        <div class="menu">
+            <div class="wrap_body">
+                <a href="/">Главная</a>
+                {% for page in pages %}
+                {% if page.visible == 1 %}
+                <a href="{{ page.url }}">{{ page.name }}</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </nav>
         <div id="content">
             {% block content %}
 

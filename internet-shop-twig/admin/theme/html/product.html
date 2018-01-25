@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ product.name }} </h1> <!--назв товара-->
+<div class="col-lg-12">
+    <!--все нах только в форме-->
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ product.id }}">  <!--скрытое поле для контроля есть ли в базе данных такой id-->
+        <div class="form-group">
+            <label>Название</label>
+            <input class="form-control" type="text" name="name" value="{{ product.name }}">
+        </div>
+        <div class="form-group">
+            <label>Цена</label>
+            <input class="form-control" type="text" name="price" value="{{ product.price }}">
+        </div>
+        <div class="form-group">
+            <label>Количество</label>
+            <input class="form-control" type="text" name="amount" value="{{ product.amount }}">
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input class="form-control" type="text" name="url" value="{{ product.url }}">
+        </div>
+        <div class="form-group">
+            <label>Видимость</label>
+            {% if product.visible == 1 %}
+            <input class="form-control" type="checkbox" name="visible" value="1" checked>
+            {% else %}
+            <input class="form-control" type="checkbox" name="visible" value="1">
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label>Хит продаж</label>
+            {% if product.hit == 1 %}
+            <input class="form-control" type="checkbox" name="hit" value="1" checked>
+            {% else %}
+            <input class="form-control" type="checkbox" name="hit" value="1">
+            {% endif %}
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label>Картинка</label>
+                <input class="form-control" type="file" name="files" value="">
+            </div>
+            <div class="col-md-3">
+                {% if product.file_name is empty %}
+                <p>Картинки нет</p>
+                {% else %}
+                <a href="/admin/product?id={{ product.id }}"><img src='/uploads/{{ product.file_name }}' alt='' width='90' /></a>
+                <input class="center del-file" type="submit" name="del_file" value="Удалить файл">
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Вышестящая категория</label>
+            <select name="parent_id" >
+                {% if product.category_id == 0 %}
+                    <option value="0">Нет вышестоящей категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% else %}
+                    <!--{% set cp = category.parent_id %}-->
+                    {% for category in categories %}
+                        {% if product.category_id == category.id %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    <option value="0">Нет вышестоящей категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Описание</label>
+            <textarea class="form-control" name="description">{{ product.description }}</textarea>
+        </div>
+
+        <input class="scenter" type="submit" name="delete" value="Удалить">
+        <input class="border center save" type="submit" name="save" value="Сохранить">
+
+    </form>
+</div>
+{% endblock %}

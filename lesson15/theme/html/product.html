@@ -2,19 +2,6 @@
 
 
 {% block content %}
-<nav>
-    <div class="menu">
-        <div class="wrap_body">
-            <a href="/">Главная</a>
-            {% for page in pages %}
-                {% if page.visible == 1 %}
-                    <a href="page?url={{ page.url }}">{{ page.name }}</a>
-                <!--<a href="page?id={{ page.id }}">{{ page.name }}</a>-->
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</nav>
 
 {% endblock %}
 

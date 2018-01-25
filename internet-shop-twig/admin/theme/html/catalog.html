@@ -1,0 +1,122 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<form method="post" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2 col-md-offset-8">
+            <div class="border center">
+                <a href="/admin/product">Добавить товар</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="border center grey">
+                <a href="../../file.csv">Экспорт товаров</a>
+            </div>
+        </div>
+        <div class="col-md-12 head-tabl">
+            <div class="col-md-1">Выбор для массовой операции</div>
+            <div class="col-md-1">Id</div>
+            <div class="col-md-1">Наименование</div>
+            <div class="col-md-1">Цена</div>
+            <div class="col-md-1">Кол-во</div>
+            <div class="col-md-1">Види-мость</div>
+            <div class="col-md-1">Хит продаж</div>
+            <div class="col-md-1">Фото</div>
+            <div class="col-md-1">Вышестоящая категория</div>
+            <div class="col-md-2">Описание</div>
+            <div class="col-v-1">Ссылка</div>
+        </div>
+        {% for product in products %}
+        <div class="col-md-12 border-bott">
+            <div class="col-md-1 center border-l-r">
+                <input class="form-control" type="checkbox" name="operations[]" value="{{ product.id }}">
+            </div>
+            <div class="col-md-1 center">{{ product.id }}</div>
+            <div class="col-md-1">
+                <a href="/admin/product?id={{ product.id }}">{{ product.name }}</a>
+            </div>
+            <div class="col-md-1 center">
+                <a href="/admin/product?id={{ product.id }}">{{ product.price }}</a>
+            </div>
+            <div class="col-md-1 center">
+                <a href="/admin/product?id={{ product.id }}">{{ product.amount }}</a>
+            </div>
+            <div class="col-md-1 center border-l-r">
+                {% if product.visible == 1 %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-md-1 center">
+                {% if product.hit == 1 %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-md-1">
+                {% if product.file_name is empty %}
+                    <p>Картинки нет</p>
+                {% else %}
+                    <a href="/admin/product?id={{ product.id }}"><img src='/uploads/{{ product.file_name }}' alt='' width='90' /></a>
+                {% endif %}
+            </div>
+            <div class="col-md-1">
+                {% for category in categories %}
+                    {% if category.id == product.category_id %}
+                        <a href="/admin/product?id={{ product.id }}">{{ category.name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-2">
+                <a href="/admin/product?id={{ product.id }}">{{ product.description }}</a>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/product?id={{ product.id }}">{{ product.url }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-2 center">
+            <select name="name_operation" itemtype="">
+                <option value="0">Выберите операцию</option>
+                <option value="1">Включить</option>
+                <option value="2">Выключить</option>
+                <option value="3">Удалить</option>
+            </select>
+        </div>
+        <div class="col-md-2 center">
+            <input class="border center" type="submit" name="save" value="Применить операцию">
+        </div>
+        <div class="col-md-2 col-md-offset-4">
+            <div class="border center">
+                <a href="/admin/product">Добавить товар</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="border center grey">
+                <a href="/admin/file.csv">Экспорт товаров</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-8">
+            <div class="border center grey">
+                <a download href="../../feed.xml">Скачать FEED XML</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="border center grey">
+                <a href="/admin/feed.php">Открыть FEED XML</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</form>
+{% endblock %}

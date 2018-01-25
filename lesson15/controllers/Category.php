@@ -21,6 +21,7 @@ class Category extends Core
         $parts = explode('/', $uri['path']);
         if (isset($parts[1])) {
             $category = $categories->getCategory($request->get('url', 'string'), 'url');
+//            $category = $categories->getCategory($request->get($parts[1], 'string'), 'url');
         }
 //        print_r($category);
         $array_vars = array(

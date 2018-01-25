@@ -1,0 +1,505 @@
+html, body {
+    /*overflow-x: hidden;*/
+}
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    outline: 0 none;
+    vertical-align: baseline;
+    /*margin: 0;*/
+    /*padding: 0;*/
+}
+
+body {
+    max-width: 100%;
+    min-width: 350px;
+    min-height: 100%;
+    font-family: 'Fira Sans', sans-serif;
+    /*font-family: 'Arimo', sans-serif;*/
+    font-size: 16px;
+    line-height: 1 !important;
+    color: #353535;
+    padding: 0;
+}
+
+.wrap_body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.col-md-4 {
+    padding: 6px;
+}
+
+h1 {
+    margin-top: 35px;
+    font-size: 2.3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+}
+
+.clear {
+    clear: both;
+}
+
+
+button {
+    cursor:pointer;
+}
+
+.button {
+    background: #0B8A0B;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #0EAF0E;
+    -ms-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
+
+/*Меню*/
+
+.menu,
+footer {
+    max-width: 100%;
+    text-align: left;
+    padding: 10px 0;
+    min-height: 60px;
+    border: 1px solid #E2DFDE;
+    background: transparent;
+    -webkit-box-shadow: 0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    -moz-box-shadow:    0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+    box-shadow:         0px 1px 10px 5px rgba(51, 51, 51, 0.15);
+}
+
+nav a,
+footer a {
+    font-size: 1.25em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    color: #0000A0;
+    display: inline-block;
+}
+
+nav a:hover, nav a:focus,
+footer a:hover, footer a:focus {
+    background: #F0FAFF;
+    -ms-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
+}
+
+/*Меню END*/
+
+
+/*Cart*/
+
+.cart {
+    float: right;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.cart a {
+    padding: 0;
+    width: 90px;
+}
+
+.cart span {
+    font-size: 0.8em;
+    /*padding-left: 0;*/
+    color: #0095D5;
+    /*margin: 18px 5px;*/
+    text-transform: none;
+    position: absolute;
+    top: 18px;
+    left: 50px;
+}
+
+nav img {
+    width: 50px;
+    height: auto;
+}
+
+/*Cart//*/
+
+
+/*Категории - список меню при нажатии на кнопку*/
+
+.categories {
+    padding: 25px 0;
+}
+
+.categories h2 {
+    margin: 0;
+    padding: 10px;
+    background: #C9E7FC;
+    width: 100%;
+    min-width: 200px;
+}
+
+.category {
+    margin-top: 20px;
+}
+
+.category > ul {
+    padding-left: 0;
+}
+
+.category li {
+    text-decoration: none;
+    text-transform: uppercase;
+    list-style-type: none;
+    position: relative;
+    background: #fff;
+    min-width: 200px;
+    white-space: nowrap;
+
+}
+
+.category li a {
+    text-align: left;
+    font-size: 18px;
+    color: #000;
+    white-space: nowrap; /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
+    padding: 5px 0;
+}
+
+.category li:hover > a { /* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
+    /*font-size: 1.05em;*/
+}
+
+/*.category > ul ul{*/
+    /*position: absolute;*/
+    /*z-index: 999;*/
+    /*left: -9999px; !* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) *!*/
+    /*opacity: 0; !* Устанавливаем начальное состояние прозрачности *!*/
+    /*!*-webkit-transition: 0.55s linear opacity; !* В Webkit выпадающие пункты будут проявляться *!*!*/
+/*}*/
+
+.category li a, .category li span {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100%;
+    /*margin-right: -100%;*/
+}
+
+.category li span {
+    color: transparent;
+    height: 25px;
+    margin-left: -100%;
+}
+
+.label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.category label:hover { /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+    background:rgba(213,241,255,0.75); /* Будет полупрозрачным */
+}
+
+.category a:hover { /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+    background:rgba(213,241,255,0.75); /* Будет полупрозрачным */
+    -ms-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.category > ul input[type=checkbox]:checked ~ label:nth-of-type(n) ~ ul {
+    position: relative;
+    left: 0; /* Приносим его обратно на экран, когда нужно */
+    top: 0;
+    /*width: 100%;*/
+    opacity: 1; /* Делаем непрозрачным */
+}
+
+/*рисуем треугольник рядом с пунктами содержащими подпункты*/
+
+.category span:before {
+    content: "";
+    border-width: .5em;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+    position: absolute;
+    top: .7em;
+    right: 0.25em;
+}
+
+.category input[type=checkbox]:checked + label > span:before{
+    transform: rotate(90deg);
+    color: #0B8A0B;
+}
+
+
+/*///Категории*/
+
+
+
+
+
+/*Продукция*/
+
+.products {
+    padding: 37px 0;
+}
+
+.product {
+    min-height: 450px;
+    padding: 1% 1.5%;
+    text-align: center;
+}
+
+.wrap_product {
+    border: 1px solid #EBEAE9;
+    min-height: 430px;
+    padding: 7%;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+}
+
+.wrap_product > a {
+    display: block;
+    color: blue;
+}
+
+.wrap_product:hover {
+    -ms-transform:scale(1.01);
+    -webkit-transform:scale(1.01);
+    transform:scale(1.01);
+    -webkit-box-shadow: 0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 9px 4px rgba(50, 50, 50, 0.05);
+}
+
+.product_data {
+    position: absolute;
+    right: 5%;
+    top: 0.5%;
+}
+
+.hit {
+    position: absolute;
+    left: -5%;
+    top: -5%;
+    width: 85px;
+}
+
+.product_name {
+    margin: 7px 0;
+    min-height: 72px;
+}
+
+.wrap_product > a:visited {
+    color: darkblue;
+}
+
+.product_name h3 {
+    display: inline;
+    font-size: 1.7em;
+    font-weight: normal;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.price p {
+    margin: 0 0 5px 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+.img-prod {
+    min-height: 230px;
+}
+
+.img-prod > img {
+    min-height: 200px;
+}
+
+.stock p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+/*///Продукция*/
+
+
+/*Страница товара*/
+
+.product-page {
+    padding: 37px 0;
+}
+
+.product-page h1 {
+    font-size: 1.75em;
+    margin: 0 0 10px;
+}
+
+.img-prod-page {
+    float: left;
+    width: 50%;
+    padding-right: 3%;
+}
+
+.info-product-page form h3 {
+    margin-bottom: 5px;
+}
+
+.info-product-page {
+    float: left;
+    width: 50%;
+    padding: 0 3% 3%;
+    border: 1px solid #EBEAE9;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    -moz-box-shadow:    0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+    box-shadow:         0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+}
+
+.sku-product_page {
+    float: right;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #EBEAE9;
+    margin: 3% 0;
+}
+
+.price-product_page {
+    float: left;
+    width: 60%;
+}
+
+.zakaz-product_page {
+    float: left;
+    width: 40%;
+}
+
+.price-product_page p,
+.price-product_page option {
+    color: #FF6A00;
+    font-weight: bold;
+    margin: 0;
+}
+
+.price-product_page p {
+    font-size: 1.5em;
+}
+
+.price-product_page option {
+    font-size: 1.1em;
+}
+
+.zakaz-product_page input {
+    margin-top: 5px;
+}
+
+input[name="favor"] {
+    border: none;
+    background: transparent;
+    text-align: right;
+    text-decoration: underline;
+    color: blue;
+    margin-top: 27px;
+    display: block;
+    float: right;
+    cursor: pointer;
+}
+
+/*///Страница товара*/
+
+
+
+/*Страница Корзины*/
+
+.cart-page {
+    padding: 20px 0;
+}
+
+.cart-page h1 {
+    font-size: 1.75em;
+    margin: 0 0 10px;
+}
+
+.cart-page table {
+    text-align: center;
+    max-width: 99%;
+    border: solid 1px rgb(185, 190, 194);
+}
+
+.cart-page th {
+    text-align: center;
+}
+
+.cart-page th, .cart-page td {
+    border: solid 1px rgb(185, 190, 194);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cart-page th:first-of-type {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.cart-page table tr td:nth-of-type(2) {
+    text-align: left;
+}
+
+.cart-page a {
+    text-decoration: underline;
+}
+
+.cart-page input {
+    text-align: center;
+}
+
+.koord-button  {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.color-blue {
+    background: #1897D0 !important;
+}
+
+.color-blue:hover {
+    background: #29AEE7;
+
+}
+
+/*///Страница Корзины*/

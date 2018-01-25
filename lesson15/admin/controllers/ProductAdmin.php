@@ -20,6 +20,7 @@ class ProductAdmin extends CoreAdmin
             $product->description = $request->post('description');
             $product->visible = $request->post('visible','integer');
             $product->hit = $request->post('hit','integer');
+//            $product->hit = $request->post('hit','integer');
             $file = $request->files('files');
 //            print_r($file);
             $bd = 'images';

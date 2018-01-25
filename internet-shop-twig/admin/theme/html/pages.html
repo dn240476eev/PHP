@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{{ name }}</h1>
+<form method="post" enctype="multipart/form-data">
+<div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <div class="border center">
+                <a href="/admin/page">Добавить страницу</a>
+            </div>
+        </div>
+    <div class="col-md-12">
+        <div class="col-md-12 head-tabl">
+            <div class="col-md-1">Выбор для массовой операции</div>
+            <div class="col-md-1">Id</div>
+            <div class="col-md-2">Наименование</div>
+            <div class="col-md-1">Порядок вывода</div>
+            <div class="col-md-1">Види-мость</div>
+            <div class="col-md-5">Описание</div>
+            <div class="col-md-1">Ссылка</div>
+        </div>
+        {% for page in pages %}
+        <div class="col-md-12 border-bott">
+            <div class="col-md-1 center border-l-r">
+                <input class="form-control" type="checkbox" name="operations[]" value="{{ page.id }}">
+            </div>
+            <div class="col-md-1 center">{{ page.id }}</div>
+            <div class="col-md-2">
+                <a href="/admin/page?id={{ page.id }}">{{ page.name }}</a>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/page?id={{ page.id }}">{{ page.sort }}</a>
+            </div>
+            <div class="col-md-1 center border-l-r">
+                {% if page.visible == 1 %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1" checked>
+                {% else %}
+                <input disabled class="form-control" type="checkbox" name="hit" value="1">
+                {% endif %}
+            </div>
+            <div class="col-md-5">
+                <a href="/admin/page?id={{ page.id }}">{{ page.description }}</a>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/page?id={{ page.id }}">{{ page.url }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-2 center">
+            <select name="name_operation" itemtype="">
+                <option value="0">Выберите операцию</option>
+                <option value="1">Включить</option>
+                <option value="2">Выключить</option>
+                <option value="3">Удалить</option>
+            </select>
+        </div>
+        <div class="col-md-2 center">
+            <input class="border center" type="submit" name="save" value="Применить операцию">
+        </div>
+        <div class="col-md-2 col-md-offset-6">
+            <div class="border center">
+                <a href="/admin/page">Добавить страницу</a>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

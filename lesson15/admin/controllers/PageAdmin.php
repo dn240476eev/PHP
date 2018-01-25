@@ -10,6 +10,7 @@ class PageAdmin extends CoreAdmin
 
         if($request->method() == 'POST') {
             $page->name = $request->post('name');
+            $page->sort = $request->post('sort');
             $page->description = $request->post('description');
             $page->visible = $request->post('visible','integer');
 //            $product->image = $request->post('image');

@@ -18,12 +18,13 @@ class Page extends Core
 
         $uri = parse_url($_SERVER['REQUEST_URI']);
         $parts = explode('/', $uri['path']);
+//        print_r($parts);
         if (isset($parts[1])) {
-            $page = $pages->getPage($request->get('url', 'string'), 'url');
+//            $page = $pages->getPage($request->get('url', 'string'), 'url');
 //            $page = $pages->getPage($request->get('id','integer'));
 //            echo '11111';
 //            print_r($page);
-//            $page = $pages->getPage($parts[1], 'url');
+            $page = $pages->getPage($parts[1], 'url');
 
         }
         $array_vars = array(

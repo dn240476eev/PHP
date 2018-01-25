@@ -1,23 +1,7 @@
 {% extends "index.html" %}
 
 {% block content %}
-<head>
-    <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-</head>
-<nav>
-    <div class="menu">
-        <div class="wrap_body">
-            <a href="/">Главная</a>
-            {% for page in pages %}
-                {% if page.visible == 1 %}
-                    <a href="page?url={{ page.url }}">{{ page.name }}</a>
-                    <!--<a href="page?id={{ page.id }}">{{ page.name }}</a>-->
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</nav>
+
 {% endblock %}
 
 
@@ -95,6 +79,7 @@
                                 <div class="product">
                                     <div class="wrap_product">
                                         <a href="product?url={{ product.url }}">
+                                        <!--<a href="product?url={{ product.url }}">-->
                                             <!--Дата товара-->
                                             <div class="product_data">
                                                 <p>{{ product.created_at }}</p>

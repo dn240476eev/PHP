@@ -1,0 +1,113 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <link href="/theme/assets/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="/admin/theme/assets/css/flat-ui.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="/theme/assets/css/style.css">
+        <link rel="shortcut icon" href="../assets/img/favicon.ico">
+    </head>
+    <body>
+    <nav>
+        <div class="menu">
+            <div class="wrap_body">
+                <a href="/">Главная</a>
+                {% for page in pages %}
+                {% if page.visible == 1 %}
+                <a href="/{{ page.url }}">{{ page.name }}</a>
+                {% endif %}
+                {% endfor %}
+                <div class="cart">
+                    <!--<?php $cart = getCard($products); ?>-->
+                    <a href="/cart">
+                    <img src="/theme/assets/img/cart.png" />
+                    <!--<?php if (!empty($cart['summ_prod'])) : ?>-->
+                    <!--<span>(<?php echo $cart['summ_prod']; ?> ед)</span>-->
+                    <!--<?php endif ?>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+        <div id="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+
+        <div id="sidebar">
+            <div class="container-fluid wrap_body">
+                <div class="row">
+                    <div class="col-sm-4 col-md-3">
+                        <div class="categories">
+                            <h2>Категории</h2>
+                            <div class="category">
+                                {% macro menu_categories(categories) %}
+                                {% import _self as macros %}
+                                {% for category in categories %}
+                                {% if category.visible %}
+                                <li>
+                                    <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
+                                    <!--<label for="{{ category.id }}" class="label">-->
+                                    <a href="/category/{{ category.url }}">{{ category.name }}</a>
+                                    <!--<a href="category?url={{ category.url }}">{{ category.name }}</a>-->
+                                    {% if category.visible %}
+                                    {% if category.subcategories %}
+                                    <!--<span>></span>-->
+                                    <!--</label>-->
+                                    <ul>
+                                        {{ macros.menu_categories(category.subcategories) }}
+                                    </ul>
+
+                                    {% endif %}
+                                    {% endif %}
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% endmacro %}
+
+                                {% import _self as macros %}
+
+                                <ul class="main-menu">
+                                    {{ macros.menu_categories(categories) }}
+                                </ul>
+                            </div>
+
+                            <!--<ul>-->
+                            <!--{% for category in categories %}-->
+                            <!--{% if category.visible %}-->
+                            <!--<li>-->
+                            <!--<input type="checkbox" name="but" id="category.id">-->
+                            <!--<label for="category.id" class="label">-->
+                            <!--<a href='#'>{{ category.name }}</a>-->
+                            <!--{% if category.subcategories|length > 0 %}-->
+                            <!--<span>></span>-->
+                            <!--</label>-->
+                            <!--<ul>-->
+                            <!--{% for category in category.subcategories %}-->
+                            <!--{% if category.visible %}-->
+                            <!--<li>-->
+                            <!--<a href="{{ category.id }}">{{ category.name }}</a>-->
+                            <!--</li>-->
+                            <!--{% endif %}-->
+                            <!--{% endfor %}-->
+                            <!--</ul>-->
+                            <!--{% endif %}-->
+                            <!--</label>-->
+                            <!--</li>-->
+                            <!--{% endif %}-->
+                            <!--{% endfor %}-->
+                            <!--</ul>-->
+                        </div>
+                    </div>
+                    {% block sidebar %}
+
+                    {% endblock %}
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
