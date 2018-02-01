@@ -12,7 +12,7 @@ class CatalogAdmin extends CoreAdmin
         $field[0] = "file_name";
         $field[1] = "product_id";
 
-        if($request->method() == 'POST') {
+        if($request->method() == 'POST' && isset($_POST['save'])) {
             $name_operation = $request->post('name_operation');
             $operations = $request->post('operations');
 
@@ -24,14 +24,17 @@ class CatalogAdmin extends CoreAdmin
         }
         $products_catalog = $products->getProducts();
         $categories_catalog = $categories->getCategories();
-        $products->getCsv();
-        $xml = $products->getXml2();
+        if($request->method() == 'POST' && isset($_POST['csv'])) {
+            $products->getCsv();
+        }
+        if($request->method() == 'POST' && isset($_POST['feed'])) {
+            $xml = $products->getXml2();
+        }
 
         $array_vars = array(
             'name' => 'Продукция',
             'products' => $products_catalog,
             'categories' => $categories_catalog,
-            'xml' => $xml,
         );
 
         return $this->view->render('catalog.html',$array_vars);

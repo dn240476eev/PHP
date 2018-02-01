@@ -5,7 +5,7 @@
 <h1>{{ product.name }} </h1> <!--назв товара-->
 <div class="col-lg-12">
     <!--все нах только в форме-->
-
+    <div class="product-page">
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{ product.id }}">  <!--скрытое поле для контроля есть ли в базе данных такой id-->
         <div class="form-group">
@@ -27,17 +27,21 @@
         <div class="form-group">
             <label>Видимость</label>
             {% if product.visible == 1 %}
-            <input class="form-control" type="checkbox" name="visible" value="1" checked>
+            <input class="checkbox form-control" type="checkbox" id="checkbox1"  name="visible" value="1" checked>
+            <label for="checkbox1"></label>
             {% else %}
-            <input class="form-control" type="checkbox" name="visible" value="1">
+            <input class="checkbox form-control" type="checkbox" id="checkbox1"  name="visible" value="1">
+            <label for="checkbox1"></label>
             {% endif %}
         </div>
         <div class="form-group">
             <label>Хит продаж</label>
             {% if product.hit == 1 %}
-            <input class="form-control" type="checkbox" name="hit" value="1" checked>
+            <input class="checkbox" type="checkbox" id="checkbox2"  name="hit" value="1" checked>
+            <label for="checkbox2"></label>
             {% else %}
-            <input class="form-control" type="checkbox" name="hit" value="1">
+            <input class="checkbox"  type="checkbox" id="checkbox2" name="hit" value="1">
+            <label for="checkbox2"></label>
             {% endif %}
         </div>
         <div class="form-group row">
@@ -86,5 +90,6 @@
         <input class="border center save" type="submit" name="save" value="Сохранить">
 
     </form>
+    </div>
 </div>
 {% endblock %}

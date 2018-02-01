@@ -23,7 +23,7 @@ class Database
     }
     public function query($query)
     {
-//        echo $query;
+       // echo $query;
         if (empty($query))
         {
             return false;

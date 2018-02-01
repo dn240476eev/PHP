@@ -17,7 +17,7 @@ class CategoryAdmin extends CoreAdmin
 //            $field = 'image';
 
         if($request->method() == 'POST' && isset($_POST['save'])) {
-            $category->id = $request->post('id');
+            // $category->id = $request->post('id','integer');
             $category->name = $request->post('name');
             $category->visible = $request->post('visible','integer');
             $category->parent_id = $request->post('parent_id');

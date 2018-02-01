@@ -19,7 +19,7 @@ class Route
             '/admin/page' => 'PageAdmin',
         );
         if($uri['path']) {
-print_r($controllers_dir.$uri_array[$uri['path']]);
+//print_r($controllers_dir.$uri_array[$uri['path']]);
             if(file_exists($controllers_dir.$uri_array[$uri['path']] . '.php')) {
                 require $controllers_dir.$uri_array[$uri['path']] . '.php'; //controllers/Main.php
                 $controller = new $uri_array[$uri['path']](); // new Main();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 26 2018 г., 01:11
+-- Время создания: Фев 02 2018 г., 01:23
 -- Версия сервера: 5.6.37
 -- Версия PHP: 5.5.38
 
@@ -54,7 +54,8 @@ INSERT INTO `categories` (`id`, `name`, `url`, `description`, `visible`, `image`
 (16, 'IPhone', 'iphone', '', 1, 's_dnem_rozhdeniya_d42026e491.jpg', 14, '2018-01-05 22:20:58', '2018-01-05 22:20:58'),
 (17, 'Куклы', 'kukly', '', 1, 'mng-060_7fbf78bb2c.jpg', 15, '2018-01-05 22:25:43', '2018-01-05 22:25:43'),
 (19, 'Коляски', 'kalyaski', '', 1, 'thumb300_462721b978.jpg', 15, '2018-01-05 22:35:43', '2018-01-05 22:35:43'),
-(44, 'Мотоциклы', 'mototsikl-k255', 'Мото', 1, NULL, 17, '2018-01-24 20:23:17', '2018-01-24 20:23:17');
+(44, 'Мотоциклы', 'mototsikl-k255', 'Мото', 1, NULL, 17, '2018-01-24 20:23:17', '2018-01-24 20:23:17'),
+(45, 'тестовая категория', 'testovaya-kategoriya', 'тест', 0, NULL, 0, '2018-01-26 20:00:42', '2018-01-26 20:00:42');
 
 -- --------------------------------------------------------
 
@@ -78,6 +79,7 @@ INSERT INTO `images` (`id`, `file_name`, `product_id`) VALUES
 (39, '54763784_5790a7addc.jpg', 75),
 (38, '2380f8e63cecf01259871e0febfb6314_8fa55844cd.jpg', 74),
 (36, '351837d345ed6ce0e439fd60f6bb1226_5ab00204e1.jpg', 49),
+(65, 'forma4_55034f3da2.png', 128),
 (37, 'blossom-plant-leaf-flower-petal-rose-green-botany-yellow-flora-flowers_21d540c545.jpg', 83),
 (33, 'tato_d0111a1f8d.jpg', 47),
 (32, '54763784_d9215e8493.jpg', 48),
@@ -171,7 +173,9 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `amount`, `url`, `
 (89, 'Увлажнители воздуха2', '', 1334, 1, 'uvlazhniteli-vozduha2', 1, 0, '2018-01-06 23:39:51', '2018-01-06 23:39:51'),
 (90, 'Увлажнители воздуха3', 'цуцкув', 0, 0, 'uvlazhniteli-vozduha3', 1, 0, '2018-01-06 23:40:48', '2018-01-06 23:40:48'),
 (125, 'Холодильники No frost', 'Картинки по запросу холодильник ноу фрост єто\r\n«Ноу фрост» — это система охлаждения морозильной и холодильной камер, которая обеспечивает принудительную циркуляцию холодного воздуха и предотвращает образование наледи на стенках холодильника.', 13045, 1, 'holodilniki-no-frost', 1, 1, '2018-01-22 19:49:46', '2018-01-22 19:49:46'),
-(126, 'Мотоцикл К255', 'МОТОЦИКЛ, оснащенное двигателем двухколесное транспортное средство. Создание первого действующего мотоцикла обычно приписывается Готлибу ДАЙМЛЕРУ. Он установил четырехтактный ДВИГАТЕЛЬ ВНУТРЕННЕГО СГОРАНИЯ на раму деревянного велосипеда. ', 123, 1, 'mototsikl-k255', 1, 0, '2018-01-24 21:34:24', '2018-01-24 21:34:24');
+(126, 'Мотоцикл К255', 'МОТОЦИКЛ, оснащенное двигателем двухколесное транспортное средство. Создание первого действующего мотоцикла обычно приписывается Готлибу ДАЙМЛЕРУ. Он установил четырехтактный ДВИГАТЕЛЬ ВНУТРЕННЕГО СГОРАНИЯ на раму деревянного велосипеда. ', 123, 1, 'mototsikl-k255', 1, 0, '2018-01-24 21:34:24', '2018-01-24 21:34:24'),
+(128, 'Товар тестовый', 'еееееееее ееееее', 10000, 2, 'tovar-testovyj', 1, 1, '2018-01-26 19:58:52', '2018-01-26 19:58:52'),
+(129, 'Товар тестовый 2', '', 100, 1, 'tovar-testovyj-2', 1, 1, '2018-01-26 19:59:36', '2018-01-26 19:59:36');
 
 -- --------------------------------------------------------
 
@@ -206,6 +210,8 @@ INSERT INTO `products_categories` (`id`, `product_id`, `category_id`, `position`
 (54, 126, 44, 0),
 (17, 46, 1, 0),
 (18, 92, 17, 0),
+(57, 129, 0, 0),
+(56, 128, 11, 0),
 (53, 125, 12, 0),
 (29, 103, 31, 0),
 (30, 104, 30, 0),
@@ -322,12 +328,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT для таблицы `orders`
 --
@@ -342,12 +348,12 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT для таблицы `products_categories`
 --
 ALTER TABLE `products_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT для таблицы `purchases`
 --

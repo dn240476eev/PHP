@@ -17,10 +17,10 @@ class ProductAdmin extends CoreAdmin
         $field[1] = "product_id";
 
         if($request->method() == 'POST' && isset($_POST['save'])) {
-                $product->id = $request->post('id');
+                $product->id = $request->post('id', 'integer');
                 $product->name = $request->post('name');
-                $product->price = $request->post('price');
-                $product->amount = $request->post('amount');
+                $product->price = $request->post('price', 'integer');
+                $product->amount = $request->post('amount', 'integer');
                 $product->description = $request->post('description');
                 $product->visible = $request->post('visible', 'integer');
                 $product->hit = $request->post('hit', 'integer');
@@ -64,7 +64,7 @@ class ProductAdmin extends CoreAdmin
             $product = $products->getProduct($request->get('id','integer'), 'id');
 //            var_dump($product);
         }
-
+print_r($request->get('id','integer'));
         $array_vars = array(
             'product' => $product,
             'categories' => $categories_catalog,

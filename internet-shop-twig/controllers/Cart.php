@@ -3,9 +3,9 @@ class Cart extends Core
 {
     public function fetch()
     {
+        session_start();
 
-        $products = new Products(); // подключаем модель Товары
-        $product = new stdClass();
+        $carts = new Carts(); // подключаем модель Товары
 
         $pages = new Pages();
         $all_pages = $pages->getPages();
@@ -17,17 +17,40 @@ class Cart extends Core
         $categories_catalog = $categories->getCategories();
         $categories_catalog_tree = $categories->GetCategoriesTree();
 
-        $uri = parse_url($_SERVER['REQUEST_URI']);
-        $parts = explode('/', $uri['path']);
-        if (isset($parts[1])) {
-            $product = $products->getProduct($parts[2], 'url');
-//            $product = $products->getProduct($request->get('url', 'string'), 'url');
+        if($request->method() == 'POST' && isset($_POST['refresh'])) {
+            $cart_item = array();
+            foreach ($_POST['cart_item'] as $id => $amount) {
+                $id = trim(strip_tags($id));
+                $amount = trim(strip_tags($amount));
+                $cart_item[$id] = $amount;
+            }
+            foreach ($cart_item as $id => $amount) {
+                if (!empty($id) && !empty($amount)) {
+                    $carts->refreshCard($cart_item);
+                }
+            }
+            $URL = $_SERVER['HTTP_REFERER'];
+            header ("Location: $URL");
+
         }
+
+        if($request->method() == 'POST' && isset($_POST['del'])) {
+//            print_r($_COOKIE['cart']);
+            if(isset($_POST['operations'])) {
+                $operations = $_POST['operations'];
+                $carts->delCart($operations);
+            $URL = $_SERVER['HTTP_REFERER'];
+            header ("Location: $URL");
+            }
+        }
+
+        $cart_catalog = $carts->getCard();
+
         $array_vars = array(
             'pages' => $all_pages,
             'categories_catalog' => $categories_catalog,
             'categories' => $categories_catalog_tree,
-            'product' => $product,
+            'carts' => $cart_catalog,
         );
 
 //        $page = $pages->getPage($parts[1], 'url');

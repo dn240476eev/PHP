@@ -12,19 +12,20 @@
     <nav>
         <div class="menu">
             <div class="wrap_body">
-                <a href="/">Главная</a>
-                {% for page in pages %}
-                {% if page.visible == 1 %}
-                <a href="/{{ page.url }}">{{ page.name }}</a>
-                {% endif %}
-                {% endfor %}
+                <div class="pages">
+                    <a href="/">Главная</a>
+                    {% for page in pages %}
+                    {% if page.visible == 1 %}
+                    <a href="/{{ page.url }}">{{ page.name }}</a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
                 <div class="cart">
-                    <!--<?php $cart = getCard($products); ?>-->
                     <a href="/cart">
                     <img src="/theme/assets/img/cart.png" />
-                    <!--<?php if (!empty($cart['summ_prod'])) : ?>-->
-                    <!--<span>(<?php echo $cart['summ_prod']; ?> ед)</span>-->
-                    <!--<?php endif ?>-->
+                    {% if carts.summ_prod %}
+                        <span>({{ carts.summ_prod }} ед)</span>
+                    {% endif %}
                     </a>
                 </div>
             </div>
@@ -45,27 +46,26 @@
                             <div class="category">
                                 {% macro menu_categories(categories) %}
                                 {% import _self as macros %}
-                                {% for category in categories %}
-                                {% if category.visible %}
-                                <li>
-                                    <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
-                                    <!--<label for="{{ category.id }}" class="label">-->
-                                    <a href="/category/{{ category.url }}">{{ category.name }}</a>
-                                    <!--<a href="category?url={{ category.url }}">{{ category.name }}</a>-->
+                                    {% for category in categories %}
                                     {% if category.visible %}
-                                    {% if category.subcategories %}
-                                    <!--<span>></span>-->
-                                    <!--</label>-->
-                                    <ul>
-                                        {{ macros.menu_categories(category.subcategories) }}
-                                    </ul>
+                                    <li>
+                                        <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
+                                        <!--<label for="{{ category.id }}" class="label">-->
+                                        <a href="/category/{{ category.url }}">{{ category.name }}</a>
+                                        {% if category.visible %}
+                                        {% if category.subcategories %}
+                                        <!--<span>></span>-->
+                                        <!--</label>-->
+                                        <ul>
+                                            {{ macros.menu_categories(category.subcategories) }}
+                                        </ul>
 
+                                        {% endif %}
+                                        {% endif %}
+                                    </li>
                                     {% endif %}
-                                    {% endif %}
-                                </li>
-                                {% endif %}
-                                {% endfor %}
-                                {% endmacro %}
+                                    {% endfor %}
+                                    {% endmacro %}
 
                                 {% import _self as macros %}
 
@@ -73,32 +73,6 @@
                                     {{ macros.menu_categories(categories) }}
                                 </ul>
                             </div>
-
-                            <!--<ul>-->
-                            <!--{% for category in categories %}-->
-                            <!--{% if category.visible %}-->
-                            <!--<li>-->
-                            <!--<input type="checkbox" name="but" id="category.id">-->
-                            <!--<label for="category.id" class="label">-->
-                            <!--<a href='#'>{{ category.name }}</a>-->
-                            <!--{% if category.subcategories|length > 0 %}-->
-                            <!--<span>></span>-->
-                            <!--</label>-->
-                            <!--<ul>-->
-                            <!--{% for category in category.subcategories %}-->
-                            <!--{% if category.visible %}-->
-                            <!--<li>-->
-                            <!--<a href="{{ category.id }}">{{ category.name }}</a>-->
-                            <!--</li>-->
-                            <!--{% endif %}-->
-                            <!--{% endfor %}-->
-                            <!--</ul>-->
-                            <!--{% endif %}-->
-                            <!--</label>-->
-                            <!--</li>-->
-                            <!--{% endif %}-->
-                            <!--{% endfor %}-->
-                            <!--</ul>-->
                         </div>
                     </div>
                     {% block sidebar %}

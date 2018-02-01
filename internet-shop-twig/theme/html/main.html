@@ -15,36 +15,41 @@
                             <div class="col-sm-6 col-md-4">
                                 <div class="product">
                                     <div class="wrap_product">
-                                        <a href="product/{{ product.url }}">
-                                        <!--<a href="product?url={{ product.url }}">-->
-                                            <!--Дата товара-->
-                                            <div class="product_data">
-                                                <p>{{ product.created_at }}</p>
-                                            </div>
-                                            <div class="hit">
-                                                <img src='/uploads/hit.png' alt='hit' />
-                                            </div>
-                                            <!--Изображение товара-->
-                                            <div class="img-prod">
-                                                {% if product.file_name is empty %}
-                                                    <p>Картинки нет</p>
-                                                {% else %}
-                                                    <img src='/uploads/{{ product.file_name }}' alt='' width='90' />
-                                                {% endif %}
-                                            </div>
-                                            <!--Название товара-->
-                                            <div class="product_name">
-                                                <h3>{{ product.name }}</h3>
-                                            </div>
-                                            <!--Цена товара-->
-                                            <div class="price">
-                                                <p>{{ product.price }} грн</p>
-                                            </div>
-                                            <!--Количество товара-->
-                                            <div class="stock">
-                                                <p>На складе: {{ product.amount }} шт</p>
-                                            </div>
-                                        </a>
+                                        <form method="post">
+                                            <input type="hidden" name="id" value="{{ product.id }}">
+                                            <a href="product/{{ product.url }}">
+                                            <!--<a href="product?url={{ product.url }}">-->
+                                                <!--Дата товара-->
+                                                <div class="product_data">
+                                                    <p>{{ product.created_at }}</p>
+                                                </div>
+                                                <div class="hit">
+                                                    <img src='/uploads/hit.png' alt='hit' />
+                                                </div>
+                                                <!--Изображение товара-->
+                                                <div class="img-prod">
+                                                    {% if product.file_name is empty %}
+                                                        <p>Картинки нет</p>
+                                                    {% else %}
+                                                        <img src='/uploads/{{ product.file_name }}' alt='' width='90' />
+                                                    {% endif %}
+                                                </div>
+                                                <!--Название товара-->
+                                                <div class="product_name">
+                                                    <h3>{{ product.name }}</h3>
+                                                </div>
+                                                <!--Цена товара-->
+                                                <div class="price">
+                                                    <p>{{ product.price }} грн</p>
+                                                </div>
+                                                <!--Количество товара-->
+                                                <div class="stock">
+                                                    <p>На складе: {{ product.amount }} шт</p>
+                                                </div>
+                                            </a>
+                                                <div class="clear"></div>
+                                            <button class="button" type="submit" name="cart" value="1">В корзину</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -32,7 +32,8 @@
         {% for product in products %}
         <div class="col-md-12 border-bott">
             <div class="col-md-1 center border-l-r">
-                <input class="form-control" type="checkbox" name="operations[]" value="{{ product.id }}">
+                <input class="checkbox" type="checkbox" id="checkbox" name="operations[]" value="{{ product.id }}">
+                <label for="checkbox"></label>
             </div>
             <div class="col-md-1 center">{{ product.id }}</div>
             <div class="col-md-1">
@@ -99,16 +100,15 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="border center grey">
-                <a href="/admin/file.csv">Экспорт товаров</a>
-            </div>
+            <input class="border center" type="submit" name="csv" value="Экспорт товаров">
+            <!--<div class="border center grey">-->
+                <!--<a href="/admin/file.csv">Экспорт товаров</a>-->
+            <!--</div>-->
         </div>
     </div>
     <div class="row">
         <div class="col-md-2 col-md-offset-8">
-            <div class="border center grey">
-                <a download href="../../feed.xml">Скачать FEED XML</a>
-            </div>
+                <input class="border center" type="submit" name="feed" value="Скачать FEED XML">
         </div>
         <div class="col-md-2">
             <div class="border center grey">

@@ -24,7 +24,8 @@
         {% for category in categories %}
         <div class="col-lg-12 border-bott">
             <div class="col-md-1 center border-l-r">
-                <input class="form-control" type="checkbox" name="operations[]" value="{{ category.id }}">
+                <input class="checkbox" type="checkbox" id="checkbox" name="operations[]" value="{{ category.id }}">
+                <label for="checkbox"></label>
             </div>
             <div class="col-lg-1 center">{{ category.id }}</div>
             <div class="col-lg-2">

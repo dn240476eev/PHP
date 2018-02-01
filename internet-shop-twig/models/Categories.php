@@ -44,7 +44,7 @@ class Categories extends Database
 
     public function getCategories()
     {
-        $query = "SELECT id, name, description, url, visible, image, parent_id FROM categories ORDER BY parent_id";
+        $query = "SELECT id, name, description, url, visible, image, parent_id FROM categories ORDER BY  id DESC";
         $this->query($query);
 //        print_r($this->results());
         return $this->results();

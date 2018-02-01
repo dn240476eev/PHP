@@ -1,6 +1,6 @@
 <?php
     $cart = getCard($products);
-    //    print_r($cart);
+//        print_r($cart);
 ?>
 
 <div class="cart-page">

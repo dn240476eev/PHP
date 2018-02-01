@@ -16,8 +16,7 @@ body {
     max-width: 100%;
     min-width: 350px;
     min-height: 100%;
-    font-family: 'Fira Sans', sans-serif;
-    /*font-family: 'Arimo', sans-serif;*/
+    font-family: 'Arimo', sans-serif;
     font-size: 16px;
     line-height: 1 !important;
     color: #353535;
@@ -28,10 +27,15 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    position: relative;
 }
 
 .col-md-4 {
     padding: 6px;
+}
+
+h1, h2, h3 {
+    font-family: 'Ubuntu', sans-serif;
 }
 
 h1 {
@@ -97,11 +101,14 @@ footer {
 
 nav a,
 footer a {
-    font-size: 1.25em;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.3em;
     text-transform: uppercase;
     padding: 12px 20px;
     color: #0000A0;
     display: inline-block;
+    border: solid 1px #fff;
+    border-radius: 5px;
 }
 
 nav a:hover, nav a:focus,
@@ -112,20 +119,24 @@ footer a:hover, footer a:focus {
     transform:scale(1.1);
 }
 
+.pages {
+    margin-right: 80px;
+}
+
 /*Меню END*/
 
 
 /*Cart*/
 
 .cart {
-    float: right;
-    position: relative;
-    padding-bottom: 5px;
+    position: absolute;
+    right: 10px;
+    top: 0;
 }
 
 .cart a {
-    padding: 0;
-    width: 90px;
+    padding: 0 5px;
+    width: 110px;
 }
 
 .cart span {
@@ -181,24 +192,13 @@ nav img {
 }
 
 .category li a {
+    font-family: 'Ubuntu', sans-serif;
     text-align: left;
-    font-size: 18px;
+    font-size: 1.3em;
     color: #000;
     white-space: nowrap; /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
-    padding: 5px 0;
+    padding: 5px 3px;
 }
-
-.category li:hover > a { /* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
-    /*font-size: 1.05em;*/
-}
-
-/*.category > ul ul{*/
-    /*position: absolute;*/
-    /*z-index: 999;*/
-    /*left: -9999px; !* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) *!*/
-    /*opacity: 0; !* Устанавливаем начальное состояние прозрачности *!*/
-    /*!*-webkit-transition: 0.55s linear opacity; !* В Webkit выпадающие пункты будут проявляться *!*!*/
-/*}*/
 
 .category li a, .category li span {
     display: inline-block;
@@ -224,13 +224,15 @@ nav img {
 }
 
 .category a:hover { /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+    border: solid 1px #fff;
+    border-radius: 7px;
     background:rgba(213,241,255,0.75); /* Будет полупрозрачным */
     -ms-transform:scale(1.1);
     -webkit-transform:scale(1.1);
     transform:scale(1.1);
 }
 
-input[type=checkbox] {
+.category input[type=checkbox] {
     display: none;
 }
 
@@ -273,19 +275,23 @@ input[type=checkbox] {
 }
 
 .product {
-    min-height: 450px;
+    min-height: 490px;
     padding: 1% 1.5%;
     text-align: center;
 }
 
 .wrap_product {
     border: 1px solid #EBEAE9;
-    min-height: 430px;
+    min-height: 470px;
     padding: 7%;
     position: relative;
     -webkit-box-shadow: 0px 1px 5px 3px rgba(50, 50, 50, 0.05);
     -moz-box-shadow:    0px 1px 5px 3px rgba(50, 50, 50, 0.05);
     box-shadow:         0px 1px 5px 3px rgba(50, 50, 50, 0.05);
+}
+
+.products h1 {
+    margin: 0 0 15px ;
 }
 
 .wrap_product > a {
@@ -337,6 +343,9 @@ input[type=checkbox] {
     font-size: 1.3em;
     font-weight: bold;
     color: #333;
+    position: absolute;
+    bottom: 100px;
+    left: 35%;
 }
 
 .img-prod {
@@ -351,6 +360,19 @@ input[type=checkbox] {
     margin: 0;
     font-size: 0.9em;
     color: #333;
+    position: absolute;
+    bottom: 80px;
+    left: 30%;
+}
+
+.product {
+    position: relative;
+}
+
+.product form button{
+    position: absolute;
+    bottom: 15px;
+    left: 25%;
 }
 
 /*///Продукция*/
@@ -452,13 +474,13 @@ input[name="favor"] {
 
 .cart-page h1 {
     font-size: 1.75em;
-    margin: 0 0 10px;
+    margin: 20px 10px;
 }
 
 .cart-page table {
     text-align: center;
     max-width: 99%;
-    border: solid 1px rgb(185, 190, 194);
+    border: solid 2px rgb(185, 190, 194);
 }
 
 .cart-page th {
@@ -467,8 +489,7 @@ input[name="favor"] {
 
 .cart-page th, .cart-page td {
     border: solid 1px rgb(185, 190, 194);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
 .cart-page th:first-of-type {
@@ -488,6 +509,14 @@ input[name="favor"] {
     text-align: center;
 }
 
+.cart-page th,
+.cart-page td,
+.cart-page input,
+.cart-page output,
+.cart-page a {
+    font-size: 1.05em;
+}
+
 .koord-button  {
     text-align: right;
     margin-top: 20px;
@@ -499,7 +528,12 @@ input[name="favor"] {
 
 .color-blue:hover {
     background: #29AEE7;
-
 }
+
+input[type=checkbox] {
+    width: 25px;
+    height: 25px;
+}
+
 
 /*///Страница Корзины*/

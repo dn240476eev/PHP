@@ -9,10 +9,10 @@ class PageAdmin extends CoreAdmin
         $page = new stdClass();
 
         if($request->method() == 'POST' && isset($_POST['save'])) {
-            $page->id = $request->post('id');
+            $page->id = $request->post('id', 'integer');
             $page->name = $request->post('name');
 //            print_r($page->name);
-            $page->sort = $request->post('sort');
+            $page->sort = $request->post('sort', 'integer');
             $page->description = $request->post('description');
             $page->visible = $request->post('visible','integer');
 //            $product->image = $request->post('image');
