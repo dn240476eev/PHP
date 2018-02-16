@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+{% block sidebar %}
+<div class="col-sm-8 col-md-9">
+    <div class="cart-page">
+        <h1>Заказы</h1>
+        <h3>Дорогой наш клиент, <span>{{ order.first_name }} !</span></h3>
+        <h4>Ваш заказ успешно оформлен !</h4>
+        <h4>Номер Вашего заказа: <span>{{ order.id }}</span></h4>
+        <h4>Сумма заказа: <span>{{ order.total_cost }}</span> грн</h4>
+        <h4>Статус заказа: <span>{{ order.name }}</span></h4>
+        {% if purchases %}
+            <table>
+                <tr>
+                    <th>№</th>
+                    <th>Название товара</th>
+                    <th>Цена за шт</th>
+                    <th>Количество</th>
+                    <th>Сумма, грн</th>
+                </tr>
+                {% set i = 0 %}
+                {% for purchase in purchases %}
+                {% set cost = purchase.price * purchase.amount %}
+                <tr>
+                    {% set i = i + 1 %}
+                    <td>{{ i }}</td>
+                    <td>{{ purchase.product_name }}</td>
+                    <td>{{ purchase.price }}</td>
+                    <td>{{ purchase.amount }}</td>
+                    <td>{{ cost }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="4">ИТОГО: </th>
+                    <th>{{ order.total_cost }}</th>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

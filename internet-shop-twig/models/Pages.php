@@ -16,21 +16,15 @@ class Pages extends Database
         $val_sql = implode(',',$values);
 
         $query = "INSERT INTO pages ($colum_sql) VALUES ($val_sql)";
-//        echo ($query);
-//        die();
         $this->query($query);
         return $this->resId();
     }
 
     public function getPage($id, $type = 'id')
     {
-//print_r($type);
-//print_r($id);
-
         if(empty($id)) {
             return false;
         }
-
         $query = "SELECT id, name, sort, description, url, visible FROM pages WHERE $type = '$id' LIMIT 1";
         $this->query($query);
         return $this->result();
@@ -65,14 +59,10 @@ class Pages extends Database
         }
         $query = "DELETE FROM pages WHERE id = '$id' LIMIT 1";
         $this->query($query);
-//        echo ($query);
-//        die();
     }
 
     public function operatPages ($name_operation, $operation)
     {
-//        print_r($name_operation);
-//        print_r($operation);
         foreach ($operation as $key => $id) {
             if ($name_operation == 1) {
                 $query = "UPDATE pages SET visible = 1 WHERE id=$id";
@@ -85,7 +75,6 @@ class Pages extends Database
             }
         }
     }
-
 
 
 }

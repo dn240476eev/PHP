@@ -1,10 +1,7 @@
 <?php
 class Categories extends Database
 {
-    /*public function __construct()
-    {
-        parent::__construct();
-    }*/
+
     public $results;
 
     public function addCategory($category)
@@ -19,11 +16,8 @@ class Categories extends Database
 
         $colum_sql = implode(',',$columns);
         $val_sql = implode(',',$values);
-//        print_r($val_sql);
 
         $query = "INSERT INTO categories ($colum_sql) VALUES ($val_sql)";
-//        echo ($query);
-//        die();
         $this->query($query);
         return $this->resId();
     }
@@ -35,8 +29,6 @@ class Categories extends Database
             return false;
         }
         $query = "SELECT id, name, description, url, visible, image, parent_id FROM categories WHERE $field = '$id' LIMIT 1";
-//        echo ($query);
-//        die();
         $this->query($query);
         return $this->result();
     }
@@ -46,9 +38,17 @@ class Categories extends Database
     {
         $query = "SELECT id, name, description, url, visible, image, parent_id FROM categories ORDER BY  id DESC";
         $this->query($query);
-//        print_r($this->results());
         return $this->results();
+    }
 
+
+    public function getChildren($category_id = 0)
+    {
+        if(!empty($category_id)) {
+            $query = "SELECT id, parent_id FROM categories WHERE parent_id = $category_id";
+            $this->query($query);
+        }
+        return $this->results();
     }
 
 
@@ -58,7 +58,6 @@ class Categories extends Database
     {
         $results=array();
         $categories = $this->getCategories();
-//        print_r($categories);
         if ($categories) {
             foreach ($categories as $category) {
                 if ($category['parent_id'] == $parent_id && $category['visible']) {
@@ -72,55 +71,31 @@ class Categories extends Database
                 }
             }
         }
-//        print_r($results);
         return $results;
     }
 
 
-//id категории в products
+//id категории в products Мой вариант
 
     public function GetCategoriesId($id)
     {
         $results=array();
         $results[]=$id;
-        $categories = $this->getCategories();
-        if ($categories) {
-            foreach ($categories as $category) {
-                if ($category['parent_id'] == $id) {
-                    $results[] = $category['id'];
-                    $id = $category['id'];
-                }
-            }
+
+        if(!empty($id)) {
+            $query = "SELECT id, parent_id FROM categories WHERE parent_id = $id";
+            $this->query($query);
         }
-//        print_r($results);
+        $categories = $this->results();
+        foreach ($categories as $category) {
+            $results[] = $category['id'];
+        }
+
         return $results;
     }
 
-
-    public function makeCategories($categories)
-    {
-//        $categories = $this->GetCategoriesTree();
-        if($categories) { // проверка лишней не бывает
-            echo "<ul>";
-            foreach ($categories as $category) {
-                if($category['visible']) { //важная проверка, которая позволит выводит только включенные категории на сайте
-                    echo "<li><input type=\"checkbox\" name=\"but\" id=\"".$category['id']."\">
-                <label for=\"".$category['id']."\" class=\"label\"><a href='#'>".$category['name']."</a>";
-                    if(!empty($category['subcategories'])) {
-                        // проверяем есть ли подкатегории и вызываем заново функцию для вывода
-                        echo "<span>></span></label>";
-                        $this->makeCategories($category['subcategories']); // передаем в функцию уже массив обьектов покатегорий
-                    }
-//                    print_r($category['subcategories']);
-                    echo "</li>";
-                }
-            }
-            echo "</ul>";
-        }
-    }
-
-
 //Дерево категорий END
+
 
     public function updateCategory($id, $category)
     {
@@ -139,14 +114,11 @@ class Categories extends Database
 
     public function delCategory($id, $type = 'id')
     {
-//        print_r($id);
         if(empty($id)) {
             return false;
         }
         $query = "DELETE FROM categories WHERE id = '$id' LIMIT 1";
         $this->query($query);
-//        echo ($query);
-//        die();
     }
 
 

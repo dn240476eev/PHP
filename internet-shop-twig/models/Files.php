@@ -69,8 +69,6 @@ class Files extends Database
             $this->filename = $this->strFile($name)."_".$hash.".".$ext;
             if(move_uploaded_file($files['tmp_name'], '../uploads/'.$this->filename)) {
                 $query = "UPDATE $bd SET `$field[0]` = '$this->filename' WHERE id = $id";
-//        echo ($query);
-//        die();
                 $this->query($query);
                 return $this->resId();
             } else {
@@ -90,23 +88,17 @@ class Files extends Database
         if(empty($id)|| empty($file['name'])) {
             return false;
         }
-//print_r($id);
-//print_r($bd);
-//print_r($field);
          $array_ext = array('jpg', 'jpeg', 'png', 'gif');
 
          $files =  $_FILES['files'];
          $name = pathinfo($files['name'], PATHINFO_FILENAME);
          $ext = pathinfo($files['name'], PATHINFO_EXTENSION);
          $colum_sql = implode(',',$field);
-print_r($colum_sql);
         if (in_array($ext, $array_ext)) {
              $hash = substr(md5($name.date('Y-m-d-H-i-s').rand(1,1000)),0,10);
              $this->filename = $this->strFile($name)."_".$hash.".".$ext;
              if(move_uploaded_file($files['tmp_name'], '../uploads/'.$this->filename)) {
                  $query = "INSERT INTO $bd ($colum_sql) VALUES ('$this->filename', '$id')";
-//        echo ($query);
-//        die();
                  $this->query($query);
                  return $this->resId();
              } else {
@@ -119,38 +111,7 @@ print_r($colum_sql);
 
 // В простом варианте загрузка файлов: END//////////////////////////////////////////
 
-        // Мультизагрузка файлов:
-//
-//        if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES) && $_POST['multipart']) {
-//            $array_ext = array('jpg', 'jpeg', 'png', 'gif');
-//            $files =  $_FILES['files'];
-//            $cnt = count($files['name']);
-//
-////         print_r($files);
-//
-//            for ($i=0; $i<$cnt; $i++) {
-//                $name = pathinfo($files['name'][$i], PATHINFO_FILENAME);
-//                $ext = pathinfo($files['name'][$i], PATHINFO_EXTENSION);
-//
-//                if (in_array($ext, $array_ext)) {
-//                    $hash = substr(md5($name.date('Y-m-d-H-i-s').rand(1,1000)),0,10);
-//                    $filename = str2url($name)."_".$hash.".".$ext;
-//                    if(move_uploaded_file($files['tmp_name'][$i], 'files/'.$filename)) {
-//                        echo "'" . $_SERVER['DOCUMENT_ROOT'] . "files/" . $files['name'][$i] . "'" . " - OK <br>";
-//
-//                    } else {
-//                        echo "'" . $files['name'][$i] . "'" . " - ERROR<br>";
-//                    }
-//                } else {
-//                    echo "'" . $files['name'][$i] . "'" . " - не верный формат файла - возможные расширения jpg, jpeg, png, gif<br>";
-//                }
-//
-//            }
-//        }
-//         Мультизагрузка файлов END
-
     }
-
 
 
     function updateFile($id, $bd, $field, $file)
@@ -160,10 +121,6 @@ print_r($colum_sql);
         }
         $query = "SELECT $field[0] FROM $bd WHERE id = $id LIMIT 1";
         $this->query($query);
-        $file_res = $this->result();
-//        echo "<br>";
-//        print_r($id);
-//        print_r($file_res[$field[0]]);
 
         if (isset($file_res)) {
 
@@ -174,15 +131,11 @@ print_r($colum_sql);
                 for ($i = 0; $i < count($files_old); $i++) { // Перебираем все файлы
                     $ext = pathinfo($files_old[$i], PATHINFO_EXTENSION);
                     if (($files_old[$i] != ".") && ($files_old[$i] != "..")) { // Текущий каталог и родительский пропускаем
-//                        print_r($files[$i]);
-//                        print_r($file);
 
                         if ($files_old[$i] = $file_res[$field[0]]) {
                             $flag = 1;
-//                            print_r($files_old[$i]);
                             $path = $dir . $files_old[$i]; // Получаем путь к картинке
                             if (file_exists($path)) {
-//                            print_r($path);
                                 unlink($path);
                             }
 
@@ -197,9 +150,6 @@ print_r($colum_sql);
                                 $this->filename = $this->strFile($name)."_".$hash.".".$ext;
                                 if(move_uploaded_file($files['tmp_name'], '../uploads/'.$this->filename)) {
                                     $query = "UPDATE $bd SET `$field[0]` = '$this->filename' WHERE id = $id";
-//                                    $query = "UPDATE $bd SET `$field[0]` = '$this->filename' WHERE $field[1] = $id";
-                                    //        echo ($query);
-                                    //        die();
                                     $this->query($query);
                                     return $this->resId();
                                 } else {
@@ -234,9 +184,6 @@ print_r($colum_sql);
         $query = "SELECT $field[0] FROM $bd WHERE $field[1] = $id LIMIT 1";
         $this->query($query);
         $file_res = $this->result();
-//        echo "<br>";
-//        print_r($id);
-//        print_r($file_res[$field[0]]);
 
         if (isset($file_res)) {
 
@@ -247,15 +194,11 @@ print_r($colum_sql);
                 for ($i = 0; $i < count($files_old); $i++) { // Перебираем все файлы
                     $ext = pathinfo($files_old[$i], PATHINFO_EXTENSION);
                     if (($files_old[$i] != ".") && ($files_old[$i] != "..")) { // Текущий каталог и родительский пропускаем
-//                        print_r($files[$i]);
-//                        print_r($file);
 
                         if ($files_old[$i] = $file_res[$field[0]]) {
                             $flag = 1;
-//                            print_r($files_old[$i]);
                             $path = $dir . $files_old[$i]; // Получаем путь к картинке
                             if (file_exists($path)) {
-//                            print_r($path);
                                 unlink($path);
                             }
 
@@ -270,8 +213,6 @@ print_r($colum_sql);
                                 $this->filename = $this->strFile($name)."_".$hash.".".$ext;
                                 if(move_uploaded_file($files['tmp_name'], '../uploads/'.$this->filename)) {
                                     $query = "UPDATE $bd SET `$field[0]` = '$this->filename' WHERE $field[1] = $id";
-    //        echo ($query);
-    //        die();
                                     $this->query($query);
                                     return $this->resId();
                                 } else {
@@ -305,7 +246,6 @@ print_r($colum_sql);
         }
         $query = "DELETE FROM $bd WHERE $field[1] = $id LIMIT 1";
         $this->query($query);
-//        return $this->result();
     }
 
     public function delBlankFiles($bd, $field, $operation)
@@ -324,8 +264,6 @@ print_r($colum_sql);
         $query = "SELECT $field[0] FROM $bd WHERE $field[1] = $id LIMIT 1";
         $this->query($query);
         $file_res = $this->result();
-//        echo "<br>";
-//        print_r($id);
         print_r($file_res[$field[0]]);
 
         if (isset($file_res)) {
@@ -336,15 +274,11 @@ print_r($colum_sql);
                 for ($i = 0; $i < count($files_old); $i++) { // Перебираем все файлы
                     $ext = pathinfo($files_old[$i], PATHINFO_EXTENSION);
                     if (($files_old[$i] != ".") && ($files_old[$i] != "..")) { // Текущий каталог и родительский пропускаем
-//                        print_r($files[$i]);
-//                        print_r($file);
 
                         if ($files_old[$i] = $file_res[$field[0]]) {
                             $flag = 1;
-//                            print_r($files_old[$i]);
                             $path = $dir . $files_old[$i]; // Получаем путь к картинке
                             if (file_exists($path)) {
-//                            print_r($path);
                                 unlink($path);
                             }
                         }

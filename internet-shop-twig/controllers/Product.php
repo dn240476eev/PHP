@@ -4,18 +4,15 @@ class Product extends Core
     public function fetch()
     {
 
-        $products = new Products(); // подключаем модель Товары
+        $products = new Products();
         $product = new stdClass();
 
         $pages = new Pages();
         $all_pages = $pages->getPages();
-//print_r($all_pages);
 
-        $request = new Request(); // подключаем модель Запрос
+        $request = new Request();
 
-        $carts = new Carts(); // подключаем модель Товары
-
-        $categories = new Categories(); // подключаем модель Товары
+        $categories = new Categories();
         $categories_catalog = $categories->getCategories();
         $categories_catalog_tree = $categories->GetCategoriesTree();
 
@@ -27,21 +24,15 @@ class Product extends Core
         if (isset($parts[1])) {
             $product = $products->getProduct($parts[2], 'url');
         }
-//print_r($product);
         if($request->method() == 'POST' && isset($_POST['cart'])) {
             $id = $product['id'];
             $amount = $request->post('amount', 'integer');
-//            print_r($product['id']);
-//            print_r($request->post('amount', 'integer'));
             if (!empty($id) && !empty($amount)) {
                 $carts->addCard($id, $amount);
                 $URL = $_SERVER['HTTP_REFERER'];
                 header ("Location: $URL");
             }
-//            unset($_SESSION['order_id']);
         }
-//        print_r($_COOKIE['cart']);
-
 
             $array_vars = array(
             'pages' => $all_pages,
@@ -51,8 +42,21 @@ class Product extends Core
             'carts' => $cart_catalog,
             );
 
-//        $page = $pages->getPage($parts[1], 'url');
+        if(isset($product['url']) && empty($parts[3])) {
+            echo '1111';
+            return $this->view->render('product.html',$array_vars);
+        } else {
+            header("http/1.0 404 not found");
+            $page = $pages->getPage('404', 'url');
+            $array_vars = array(
+                'page' => $page,
+                'pages' => $all_pages,
+                'categories' => $categories_catalog_tree,
+                'carts' => $cart_catalog,
+            );
+            return $this->view->render('page.html', $array_vars);
+        }
 
-        return $this->view->render('product.html',$array_vars);
+
     }
 }

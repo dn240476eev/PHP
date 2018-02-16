@@ -44,9 +44,35 @@
             </table>
             <div class="koord-button">
                 <button class="button color-blue" type="submit" name="refresh" value="1">Пересчитать сумму</button>
-                <button class="button" type="submit" name="buy" value="1">Оформить заказ</button>
+            </div>
+            <div class="row">
+                <div class="regisr_form">
+                    <div class="col-xs-6 col-md-6">
+                    <h4>Ваше имя:</h4>
+                    <input type="text" name="last_name" value="">
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                    <h4>Ваша фамилия:</h4>
+                    <input type="text" name="first_name" value="">
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                    <h4>Ваш e-mail:</h4>
+                    <input type="email" name="e-mail" value="">
+                   </div>
+                    <div class="col-xs-6 col-md-6">
+                    <h4>Ваш телефон:</h4>
+                    <input type="text" name="phone" value="">
+                    </div>
+                    <div class="clear"></div>
+                </div>
             </div>
 
+            <div class="koord-button">
+                <button class="button" type="submit" name="buy" value="1">Оформить заказ</button>
+            </div>
+            {% if error  is defined %}
+                <p class="er">{{ error }}</p>
+            {% endif %}
         </form>
         {% else %}
         <p>Корзина пуста</p>

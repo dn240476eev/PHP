@@ -11,14 +11,13 @@
             <section class="products">
                 <div class="row">
                     {% for product in products %}
-                        {% if product.visible == 1 and product.hit == 1 and product.amount > 0 and i < 6 %}
+                        {% if i < 6 %}
                             <div class="col-sm-6 col-md-4">
                                 <div class="product">
                                     <div class="wrap_product">
                                         <form method="post">
                                             <input type="hidden" name="id" value="{{ product.id }}">
                                             <a href="product/{{ product.url }}">
-                                            <!--<a href="product?url={{ product.url }}">-->
                                                 <!--Дата товара-->
                                                 <div class="product_data">
                                                     <p>{{ product.created_at }}</p>

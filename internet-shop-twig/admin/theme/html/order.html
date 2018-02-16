@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<div class="cart-page">
+
+    {% if order %}
+    <form  method="post">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <h1>Заказ № {{ order.id }}</h1>
+            </div>
+            <div class="col-sm-4">
+                <label>Статус заказа</label>
+                <select name="status_id" >
+                    <option value="{{ order.status_id }}">{{ order.name }}</option>
+                    {% for status in statuses %}
+                        <option value="{{ status.id }}">{{ status.name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-7">
+                <table>
+                    <tr>
+                        <th>№</th>
+                        <th>Название товара</th>
+                        <th>Цена за шт</th>
+                        <th>Количество</th>
+                        <th>Сумма, грн</th>
+                        <th>Удалить</th>
+                    </tr>
+                    {% set i = 0 %}
+                    {% for purchase in purchases %}
+                    {% set cost = purchase.price * purchase.amount %}
+                    <tr>
+                        <input type="hidden" name="purch_id" value="{{ purchase.id }}">  <!--скрытое поле для контроля есть ли такой id-->
+                        {% set i = i + 1 %}
+                        <td>{{ i }}</td>
+                        <td><output name="name">{{ purchase.product_name }}</output></td>
+                        <td><output name="price">{{ purchase.price }}</output></td>
+                        <td><input type="number" name="cart_item[{{ purchase.id }}]" value="{{ purchase.amount }}" min="1" max="50"></td>
+                        <td><output name="summ">{{ cost }}</output></td>
+
+                        <td><input type="checkbox" name="operations[]" value="{{ purchase.id }}"></td>
+                    </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <th colspan="4">ИТОГО: </th>
+                        <th><output name="summ_price">{{ order.total_cost }}</output></th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-sm-6 col-md-5 regisr_form">
+                <input type="hidden" name="id" value="{{ order.id }}">  <!--скрытое поле для контроля есть ли такой id-->
+                <input type="hidden" name="user_id" value="{{ order.user_id }}">  <!--скрытое поле для контроля есть ли такой id-->
+                <div class="col-xs-6 col-md-6">
+                    <h4>Имя клиента:</h4>
+                    <input type="text" name="last_name" value="{{ order.last_name }}">
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <h4>Фамилия клиента:</h4>
+                    <input type="text" name="first_name" value="{{ order.first_name }}">
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <h4>Е-mail клиента:</h4>
+                    <input type="email" name="e-mail" value="{{ order.e_mail }}">
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <h4>Телефон клиента:</h4>
+                    <input type="text" name="phone" value="{{ order.phone }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-7 koord-button  koord-button1">
+            <button class="button" type="submit" name="save" value="1">Сохранить</button>
+        </div>
+        {% if error is defined %}
+            <p class="er">{{ error }}</p>
+        {% endif %}
+    </form>
+    {% else %}
+        <p>Заказ пустой</p>
+    {% endif %}
+</div>
+{% endblock %}

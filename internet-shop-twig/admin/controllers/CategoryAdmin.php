@@ -8,24 +8,18 @@ class CategoryAdmin extends CoreAdmin
 
         $files = new Files();
         $request = new Request(); // подключаем модель Запрос
-        ////////////////////////////
+
         $category = new stdClass();
         $bd = 'categories';
         $field[0] = 'image';
         $field[1] = 'id';
 
-//            $field = 'image';
-
         if($request->method() == 'POST' && isset($_POST['save'])) {
-            // $category->id = $request->post('id','integer');
             $category->name = $request->post('name');
             $category->visible = $request->post('visible','integer');
             $category->parent_id = $request->post('parent_id');
-//            $category->image = $request->post('files');
             $category->description = $request->post('description');
-//            $category->image = $request->post('files');
             $file = $request->files('files');
-;
 
             if(empty($request->post('url'))) {
                 $category->url = CoreAdmin::translit($request->post('name'));
@@ -61,7 +55,6 @@ class CategoryAdmin extends CoreAdmin
             $category = $categories->getCategory($request->get('id','integer'), 'id');
         } elseif ($request->get('id','integer')) {
             $category = $categories->getCategory($request->get('id','integer'), 'id');
-//            var_dump($category);
         }
 
         $array_vars = array(

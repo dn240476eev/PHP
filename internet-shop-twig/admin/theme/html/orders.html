@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{{ name }}</h1>
+<form method="post">
+<div class="row">
+    <div class="row">
+        <div class="col-md-2" >
+            <div class="center">
+                <a class="border" href="/admin/orders">Все заказы</a>
+            </div>
+        </div>
+        <div class="col-md-2" >
+            <div class="center">
+                <a class="border" href="/admin/orders?status=1">Новый</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="center">
+                <a class="border" href="/admin/orders?status=2">В обработке</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="center">
+                <a class="border" href="/admin/orders?status=3">Выполнен</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="center">
+                <a class="border" href="/admin/orders?status=4">Отменен</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="center">
+                <input class="center" type="submit" name="delete" value="Удалить">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-12 head-tabl">
+            <div class="col-md-1">Id заказа</div>
+            <div class="col-md-2">Статус заказа</div>
+            <div class="col-md-2">Сумма заказа, грн</div>
+            <div class="col-md-2">Клиент</div>
+            <div class="col-md-3">Ссылка</div>
+            <div class="col-md-2">Удалить</div>
+        </div>
+        {% for order in orders %}
+        <div class="col-md-12 border-bott">
+            <div class="col-md-1 center">{{ order.id }}</div>
+            <div class="col-md-2">
+                <a href="/admin/order?id={{ order.id }}">{{ order.name }}</a>
+            </div>
+            <div class="col-md-2">
+                <a href="/admin/order?id={{ order.id }}">{{ order.total_cost }}</a>
+            </div>
+            <div class="col-md-2">
+                <a href="/admin/order?id={{ order.id }}">{{ order.first_name }}</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/admin/order?id={{ order.id }}">{{ order.url }}</a>
+            </div>
+            <div class="col-md-2 center border-l-r">
+                <input class="form-control" type="checkbox" name="operations[]" value="{{ order.id }}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <input class="center" type="submit" name="delete" value="Удалить">
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}
+

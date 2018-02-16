@@ -219,12 +219,13 @@ $categories = GetCategoriesTree($categor_res);
 <?php
 //// Сообщение
 //$to = 'mihaskep@gmail.com';
-//$subject = 'Тест Open server function mail()';
-//$message = "Саша, привет !\r\nНаправляю тестовое письмо через функцию mail().\r\n\r\nС уважением, Лена Евтушенко";
-//
-//
-//// Отправляем
-//$mail = mail($to, $subject, $message);
+$to = 'dn240476eev@gmail.com';
+$subject = 'Тест Open server function mail()';
+$message = "Саша, привет !\r\nНаправляю тестовое письмо через функцию mail().\r\n\r\nС уважением, Лена Евтушенко";
+
+
+// Отправляем
+$mail = mail($to, $subject, $message);
 //
 //var_dump($mail);
 function makecoffee($types = array("капуччино"), $coffeeMaker = NULL)

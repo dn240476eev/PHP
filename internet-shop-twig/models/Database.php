@@ -6,10 +6,12 @@ class Database
      **************************************/
     private $mysqli;
     private $res;
+
     public function __construct()
     {
         $this->connect();
     }
+
     public function connect()
     {
         if (isset($this->mysqli))
@@ -21,9 +23,9 @@ class Database
             $this->mysqli = new mysqli(DB_HOST,DB_LOGIN,DB_PASS,DB_NAME);
         }
     }
+
     public function query($query)
     {
-       // echo $query;
         if (empty($query))
         {
             return false;
@@ -33,9 +35,10 @@ class Database
             return $this->res = $this->mysqli->query($query);
         }
     }
+
     public function results()
     {
-        //print_r($this->mysqli);
+        $results = array();
         $this->mysqli->errno;
         $this->mysqli->error;
         while ($res = $this->res->fetch_assoc()) {
@@ -43,6 +46,7 @@ class Database
         }
         return $results;
     }
+
     public function result() {
         return $this->res->fetch_assoc();
     }

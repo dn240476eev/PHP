@@ -1,17 +1,9 @@
 <?php
 class Products extends Database
 {
-    /*public function __construct()
-    {
-        parent::__construct();
-    }*/
 
     public function addProduct($product, $parent_id)
     {
-//        print_r($product);
-//        echo "<br>";
-//        echo "<br>";
-//        print_r($parent_id);
         if(empty($product)) {
             return false;
         }
@@ -21,30 +13,20 @@ class Products extends Database
         }
         $colum_sql = implode(',',$columns);
         $val_sql = implode(',',$values);
-//        print_r($val_sql);
         $query = "INSERT INTO products ($colum_sql) VALUES ($val_sql)";
-//        echo ($query);
-//        die();
         $this->query($query);
         $res = $this->resId();
-//        print_r($res);
         $query = "INSERT INTO products_categories (product_id, category_id) VALUES ('$res', '$parent_id')";
-////        echo ($query);
-////        die();
         $this->query($query);
         return $res;
     }
 
-
     public function getProduct($id, $type = 'id')
     {
-//        print_r($id);
-//        print_r($type);
         if(empty($id)) {
             return false;
         }
         $prod = 'p.'.$type;
-//        print_r($prod);
         $query = "SELECT pc.category_id, p.id, p.name, p.price, p.amount, p.description, p.url, p.visible, p.hit, p.created_at, i.file_name
                   FROM products p 
                   LEFT JOIN images i 
@@ -53,29 +35,45 @@ class Products extends Database
                   ON pc.product_id = p.id 
                   WHERE $prod = '$id' LIMIT 1";
         $this->query($query);
-//        print_r($this->result());
         return $this->result();
     }
 
-
-    public function getProducts()
+    public function getProducts($filter = array())
     {
+        $hit = '';
+        $visible = '';
+        $amount = '';
+        $cat_filter = '';
+
+        if(!empty($filter['hit'])) {
+            $hit = "AND p.hit = 1";
+        }
+
+        if(!empty($filter['visible'])) {
+            $visible = "AND p.visible = 1";
+        }
+
+        if(!empty($filter['amount'])) {
+            $amount = "AND p.amount > 0";
+        }
+
+        if(!empty($filter['cat_id'])) {
+            $val_sql = implode(', ',$filter['cat_id']);
+            $cat_filter = "AND pc.category_id IN ($val_sql)";
+        }
+
         $query =
             "SELECT p.id, p.name, p.price, p.amount, p.description, p.url, p.visible, p.hit, p.created_at, i.file_name, pc.category_id
             FROM products p
             LEFT JOIN images i
             ON i.product_id = p.id
-            LEFT JOIN products_categories pc
-            ON pc.product_id = p.id
-            ORDER BY pc.category_id";
-
+            LEFT JOIN products_categories pc ON pc.product_id = p.id
+            WHERE 1 $cat_filter $hit $visible $amount 
+            ORDER BY p.id DESC";
 
         $this->query($query);
-//        print_r($this->results());
         return $this->results();
-
     }
-
 
     public function updateProduct($id, $product, $parent_id)
     {
@@ -98,8 +96,6 @@ class Products extends Database
             $this->query($query);
         } else  {
             $query = "INSERT INTO products_categories (product_id, category_id) VALUES ('$id', '$parent_id')";
-////        echo ($query);
-////        die();
             $this->query($query);
         }
 
@@ -108,7 +104,6 @@ class Products extends Database
 
     public function delProduct($id, $type = 'id')
     {
-//        print_r($id);
         if(empty($id)) {
             return false;
         }
@@ -116,11 +111,9 @@ class Products extends Database
         $this->query($query);
         $query = "DELETE FROM products_categories WHERE product_id = '$id' LIMIT 1";
         $this->query($query);
-//        echo ($query);
-//        die();
     }
 
-    public function operatProducts ($name_operation, $operation)
+    public function operatProducts($name_operation, $operation)
     {
         foreach ($operation as $key => $id) {
             if ($name_operation == 1) {
@@ -150,13 +143,11 @@ class Products extends Database
             ORDER BY pc.category_id, p.name";
 
         $results = $this->query($query);
-//        print_r($this->results());
         $fp = fopen('../file.csv', 'w');
         fwrite($fp,b"\xEF\xBB\xBF" );
         fwrite($fp,"Категория;Имя;Активность;Цена;Количество;Фото;Описание\n" );
 
         foreach ($results as $row) {
-//            print_r($row);
             fputcsv($fp, $row, ';');
         }
 
@@ -178,9 +169,7 @@ class Products extends Database
             ON c.id = pc.category_id
             WHERE pc.product_id = p.id AND p.visible
             ORDER BY pc.category_id, p.name";
-
         $this->query($query);
-//        print_r($this->result());
         return $this->results();
     }
 
@@ -214,7 +203,6 @@ class Products extends Database
         $shop->appendChild($products);
 
         $products_xml = $this->getXml();
-//print_r($products_xml);
         foreach($products_xml as $product)
         {
             $id = $product['id'];
@@ -228,7 +216,6 @@ class Products extends Database
 
             $product = $doc->createElement("product$id");
             $products->appendChild($product);
-
 
             $category_name = $doc->createElement("category_name", $name_c);
             $product->appendChild($category_name);
@@ -256,7 +243,6 @@ class Products extends Database
         $file = '../feed.xml';
         $this->file_force_download($file);
     }
-
 
     public function file_force_download($file) {
         if (file_exists($file)) {

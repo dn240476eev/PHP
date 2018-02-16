@@ -22,6 +22,7 @@ class CatalogAdmin extends CoreAdmin
                 $files->delBlankFiles($bd, $field, $operations);
             }
         }
+
         $products_catalog = $products->getProducts();
         $categories_catalog = $categories->getCategories();
         if($request->method() == 'POST' && isset($_POST['csv'])) {

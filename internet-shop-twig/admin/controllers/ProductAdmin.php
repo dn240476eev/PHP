@@ -3,11 +3,11 @@ class ProductAdmin extends CoreAdmin
 {
     public function fetch()
     {
-        $products = new Products(); // подключаем модель Товары
+        $products = new Products();
         $files = new Files();
-        $categories = new Categories(); // подключаем модель Товары
-        $request = new Request(); // подключаем модель Запрос
-        ////////////////////////////
+        $categories = new Categories();
+        $request = new Request();
+
         $product = new stdClass();
         $file = new stdClass();
         $categories_catalog = $categories->getCategories();
@@ -24,9 +24,7 @@ class ProductAdmin extends CoreAdmin
                 $product->description = $request->post('description');
                 $product->visible = $request->post('visible', 'integer');
                 $product->hit = $request->post('hit', 'integer');
-//            $product->hit = $request->post('hit','integer');
                 $file = $request->files('files');
-//            print_r($file);
                 $prod_categ = $request->post('parent_id', 'integer');
 
                 if (empty($request->post('url'))) {
@@ -62,9 +60,8 @@ class ProductAdmin extends CoreAdmin
             $product = $products->getProduct($request->get('id','integer'), 'id');
         } elseif ($request->get('id','integer')) {
             $product = $products->getProduct($request->get('id','integer'), 'id');
-//            var_dump($product);
         }
-print_r($request->get('id','integer'));
+
         $array_vars = array(
             'product' => $product,
             'categories' => $categories_catalog,

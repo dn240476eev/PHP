@@ -1,6 +1,5 @@
 {% extends "index.html" %}
 
-
 {% block content %}
 <h1>{{ name }}</h1>
 <form method="post" enctype="multipart/form-data">
@@ -32,8 +31,8 @@
         {% for product in products %}
         <div class="col-md-12 border-bott">
             <div class="col-md-1 center border-l-r">
-                <input class="checkbox" type="checkbox" id="checkbox" name="operations[]" value="{{ product.id }}">
-                <label for="checkbox"></label>
+                <input class="checkbox" type="checkbox" id="checkbox[{{ product.id }}]" name="operations[]" value="{{ product.id }}">
+                <label for="checkbox[{{ product.id }}]"></label>
             </div>
             <div class="col-md-1 center">{{ product.id }}</div>
             <div class="col-md-1">
@@ -101,9 +100,6 @@
         </div>
         <div class="col-md-2">
             <input class="border center" type="submit" name="csv" value="Экспорт товаров">
-            <!--<div class="border center grey">-->
-                <!--<a href="/admin/file.csv">Экспорт товаров</a>-->
-            <!--</div>-->
         </div>
     </div>
     <div class="row">

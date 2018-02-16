@@ -4,7 +4,6 @@
         <title>{% block title %}Мой первый сайт на Twig{% endblock %}</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         <link href="/theme/assets/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!--<link href="/admin/theme/assets/css/flat-ui.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="/theme/assets/css/style.css">
         <link rel="shortcut icon" href="../assets/img/favicon.ico">
     </head>
@@ -49,13 +48,9 @@
                                     {% for category in categories %}
                                     {% if category.visible %}
                                     <li>
-                                        <!--<input type="checkbox" name="but" id="{{ category.id }}">-->
-                                        <!--<label for="{{ category.id }}" class="label">-->
                                         <a href="/category/{{ category.url }}">{{ category.name }}</a>
                                         {% if category.visible %}
                                         {% if category.subcategories %}
-                                        <!--<span>></span>-->
-                                        <!--</label>-->
                                         <ul>
                                             {{ macros.menu_categories(category.subcategories) }}
                                         </ul>

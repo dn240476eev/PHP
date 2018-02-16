@@ -7,7 +7,6 @@ class Route
 
         $uri = parse_url($_SERVER['REQUEST_URI']);
 
-
         $uri_array = array(
             '/admin/' => 'MainAdmin',
             '/admin/categories/' => 'CategoriesAdmin',
@@ -17,9 +16,10 @@ class Route
             '/admin/product' => 'ProductAdmin',
             '/admin/pages' => 'PagesAdmin',
             '/admin/page' => 'PageAdmin',
+            '/admin/orders' => 'OrdersAdmin',
+            '/admin/order' => 'OrderAdmin',
         );
         if($uri['path']) {
-//print_r($controllers_dir.$uri_array[$uri['path']]);
             if(file_exists($controllers_dir.$uri_array[$uri['path']] . '.php')) {
                 require $controllers_dir.$uri_array[$uri['path']] . '.php'; //controllers/Main.php
                 $controller = new $uri_array[$uri['path']](); // new Main();
@@ -36,8 +36,4 @@ class Route
         }
     }
 
-    public static function error404()
-    {
-        //здесь будет 404
-    }
 }

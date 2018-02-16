@@ -67,7 +67,6 @@
                         <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
                 {% else %}
-                    <!--{% set cp = category.parent_id %}-->
                     {% for category in categories %}
                         {% if product.category_id == category.id %}
                             <option value="{{ category.id }}">{{ category.name }}</option>

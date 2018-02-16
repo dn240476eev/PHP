@@ -2,12 +2,8 @@
 class Carts extends Database
 {
 
-    // ДОБАВЛЕНИЕ товара в корзину COOKIE
+// ДОБАВЛЕНИЕ товара в корзину COOKIE
 
-// передали данные
-
-
-// направили куки
     public function addCard($id, $amount) {
         if(isset($_COOKIE['cart'])){
             $cart = unserialize($_COOKIE['cart']);
@@ -18,18 +14,10 @@ class Carts extends Database
             $cart[$id] = $amount;
         }
         setcookie('cart', serialize($cart),time()+3600*24*30, '/', '', false, true);
-        $URL = $_SERVER['HTTP_REFERER'];
-//        header ("Location: $URL");
-//        print_r($id);
-//        print_r($cart);
-//        print_r($cart[$id]);
     }
 
 
 //ОБНОВЛЕНИЕ КОРЗИНЫ
-
-
-// направили куки
 
     public function refreshCard($cart_item) {
         if(isset($_COOKIE['cart'])){
@@ -60,19 +48,15 @@ class Carts extends Database
                 $cart_items['summ_prod'] += $amount;
 
             }
-//            print_r($cart);
             return $cart_items;
         } else return 0;
     }
 
 
-//// Добавление товара в корзину COOKIE
+//// Удаление товара из корзины COOKIE
 
-
-
-    public function delCart($operations)
+    public function delCartProd($operations)
     {
-//        print_r($id);
         if(empty($operations)) {
             return false;
         }
@@ -84,11 +68,23 @@ class Carts extends Database
                     if($id = $id_del) unset($cart[$id]);
                 }
             }
-            setcookie('cart', serialize($cart),time()+3600*24*30, '/', '', false, true);
+            setcookie('cart', serialize($cart), time() + 3600 * 24 * 30, '/', '', false, true);
+            if (!$cart) {
+                $this->delCart();
+            }
         }
-
-
     }
 
+//// Удаление корзины COOKIE
+
+    public function delCart()
+    {
+        if(isset($_COOKIE['cart'])) {
+            setcookie("cart", '', time() - 3600, '/', '', false, true );
+            $URL = $_SERVER['HTTP_REFERER'];
+            header ("Location: $URL");
+            print_r($_COOKIE['cart']);
+        }
+    }
 
 }

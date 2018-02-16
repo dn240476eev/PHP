@@ -19,11 +19,6 @@
                 {% endif %}
             </div>
             <div class="info-product-page">
-                <!--&lt;!&ndash;Артикул товара&ndash;&gt;-->
-                <!--<div class="sku-product_page">-->
-                    <!--<p>Артикул: <span><?php echo $product->variant->sku ?></span></p>-->
-                <!--</div>-->
-                <!--Наличие на складе товара-->
                 <div class="stock-product_page">
                     {% if product.amount is empty %}
                         <p>Нет на складе</p>
@@ -47,14 +42,13 @@
                     <div class="clear"></div>
                     <div class="line"></div>
                     <button class="button" type="submit" name="cart" value="1">В корзину</button>
-                    <!--<button class="button" type="submit" name="cart" value="1"><a href="/cart">В корзину</a></button>-->
                     <input type="submit" name="favor" value="Добавить в избранное">
                 </form>
             </div>
             <div class="clear"></div>
             <div class="description-prod-page">
                 <h3>Описание:</h3>
-                <p>{{ product.description }}</p>
+                <p>{{ product.description|raw }}</p>
             </div>
         </div>
     </div>

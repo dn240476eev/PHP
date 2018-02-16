@@ -3,19 +3,17 @@ class PageAdmin extends CoreAdmin
 {
     public function fetch()
     {
-        $pages = new Pages(); // подключаем модель Товары
+        $pages = new Pages();
         $request = new Request(); // подключаем модель Запрос
-        ////////////////////////////
+
         $page = new stdClass();
 
         if($request->method() == 'POST' && isset($_POST['save'])) {
             $page->id = $request->post('id', 'integer');
             $page->name = $request->post('name');
-//            print_r($page->name);
             $page->sort = $request->post('sort', 'integer');
             $page->description = $request->post('description');
             $page->visible = $request->post('visible','integer');
-//            $product->image = $request->post('image');
             if(empty($request->post('url'))) {
                 $page->url = CoreAdmin::translit($request->post('name'));
             } else {
@@ -26,7 +24,7 @@ class PageAdmin extends CoreAdmin
                 $id = $pages->updatePage($request->post('id','integer'),$page);
 
             } else {
-                //Добавление товара
+                //Добавление
                 $id = $pages->addPage($page);
             }
 
@@ -37,7 +35,6 @@ class PageAdmin extends CoreAdmin
             $page = $pages->delPage( $page->id, 'id');
         } elseif ($request->get('id','integer')) {
             $page = $pages->getPage($request->get('id','integer'), 'id');
-//            var_dump($product);
         }
 
         $array_vars = array(
